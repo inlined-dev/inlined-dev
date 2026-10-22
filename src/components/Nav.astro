@@ -1,0 +1,202 @@
+---
+import { getPosts, getProjects, formatDate } from "../lib/content";
+
+const posts = (await getPosts()).slice(0, 3);
+const projects = (await getProjects()).slice(0, 3);
+---
+
+<header class="site-header">
+  <nav class="wrap" aria-label="Primary">
+    <a class="home" href="/">~/inlined.dev</a>
+    <ul class="menus">
+      <li>
+        <details class="menu">
+          <summary>resume<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5"></path></svg></summary>
+          <div class="dropdown" role="list">
+            <a role="listitem" href="/resume"><span class="cmd">cat</span> resume.md <span class="hint">· read online</span></a>
+            <a role="listitem" href="/resume.pdf"><span class="cmd">curl -O</span> resume.pdf <span class="hint">· download</span></a>
+          </div>
+        </details>
+      </li>
+      <li>
+        <details class="menu">
+          <summary>blog<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5"></path></svg></summary>
+          <div class="dropdown" role="list">
+            {posts.map((post) => (
+              <a role="listitem" href={`/blog/${post.id}`}>{post.data.title} <span class="hint">· {formatDate(post.data.date)}</span></a>
+            ))}
+            {posts.length === 0 && <span class="hint pad">nothing published yet</span>}
+            <a role="listitem" class="all" href="/blog"><span class="cmd">ls</span> blog/ <span class="hint">· all posts</span></a>
+          </div>
+        </details>
+      </li>
+      <li>
+        <details class="menu">
+          <summary>portfolio<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5"></path></svg></summary>
+          <div class="dropdown" role="list">
+            {projects.map((project) => (
+              <a role="listitem" href={`/portfolio/${project.id}`}>{project.data.title}</a>
+            ))}
+            {projects.length === 0 && <span class="hint pad">nothing published yet</span>}
+            <a role="listitem" class="all" href="/portfolio"><span class="cmd">ls</span> portfolio/ <span class="hint">· everything</span></a>
+          </div>
+        </details>
+      </li>
+    </ul>
+  </nav>
+</header>
+
+<style>
+  .site-header {
+    border-bottom: 1px solid var(--line);
+  }
+
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0 16px;
+    min-height: 56px;
+  }
+
+  .home {
+    color: var(--prompt);
+    font-weight: 700;
+    text-decoration: none;
+    padding: 12px 0;
+  }
+
+  .home:hover {
+    color: var(--fg-strong);
+  }
+
+  .menus {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  .menu {
+    position: relative;
+  }
+
+  summary {
+    list-style: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 44px;
+    padding: 0 12px;
+    cursor: pointer;
+    color: var(--fg);
+    user-select: none;
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  summary:hover,
+  .menu[open] summary {
+    color: var(--fg-strong);
+  }
+
+  .menu[open] summary svg {
+    transform: rotate(180deg);
+  }
+
+  .dropdown {
+    position: absolute;
+    top: 48px;
+    right: 0;
+    z-index: 10;
+    min-width: 300px;
+    max-width: calc(100vw - 32px);
+    background: var(--panel);
+    border: 1px solid var(--line-strong);
+    border-radius: 6px;
+    padding: 6px;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .dropdown a {
+    display: block;
+    padding: 10px 12px;
+    border-radius: 4px;
+    color: var(--fg);
+    text-decoration: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .dropdown a:hover {
+    background: var(--line);
+    color: var(--fg-strong);
+  }
+
+  .dropdown .all {
+    margin-top: 4px;
+    border-top: 1px solid var(--line-strong);
+    border-radius: 0 0 4px 4px;
+    color: var(--accent);
+  }
+
+  .cmd {
+    color: var(--prompt);
+  }
+
+  .hint {
+    color: var(--muted);
+  }
+
+  .pad {
+    padding: 10px 12px;
+  }
+
+  /* On narrow screens the menus wrap under the wordmark; anchor dropdowns left */
+  @media (max-width: 560px) {
+    nav {
+      justify-content: flex-start;
+    }
+    .dropdown {
+      right: auto;
+      left: 0;
+    }
+  }
+</style>
+
+<script>
+  const menus = Array.from(document.querySelectorAll<HTMLDetailsElement>("details.menu"));
+
+  for (const menu of menus) {
+    menu.addEventListener("toggle", () => {
+      if (!menu.open) return;
+      for (const other of menus) {
+        if (other !== menu) other.open = false;
+      }
+    });
+  }
+
+  document.addEventListener("click", (event) => {
+    for (const menu of menus) {
+      if (menu.open && !menu.contains(event.target as Node)) menu.open = false;
+    }
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key !== "Escape") return;
+    for (const menu of menus) {
+      if (menu.open) {
+        menu.open = false;
+        menu.querySelector("summary")?.focus();
+      }
+    }
+  });
+</script>

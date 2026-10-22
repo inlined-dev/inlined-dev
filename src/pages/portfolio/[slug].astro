@@ -1,0 +1,58 @@
+---
+import { render } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import { getAllProjects } from "../../lib/content";
+
+export async function getStaticPaths() {
+  // Drafts get a page too (for proofreading); they just stay out of listings.
+  const projects = await getAllProjects();
+  return projects.map((project) => ({ params: { slug: project.id }, props: { project } }));
+}
+
+const { project } = Astro.props;
+const { Content } = await render(project);
+const { title, summary, role, links, draft } = project.data;
+---
+
+<Base title={title} description={summary} noindex={draft}>
+  <article>
+    {draft && (
+      <p class="draft-banner no-print">
+        <strong>draft</strong> · this entry is unlisted. Anyone with the link can read it; it is not in the portfolio index or the nav.
+      </p>
+    )}
+    <header class="article-head">
+      <p class="prompt">cat portfolio/{project.id}.md</p>
+      <h1>{title}</h1>
+      {role && <p class="meta">{role}</p>}
+      {links.length > 0 && (
+        <ul class="chips" aria-label="Links">
+          {links.map((link) => <li><a href={link.url}>{link.label} ↗</a></li>)}
+        </ul>
+      )}
+    </header>
+    <div class="prose">
+      <Content />
+    </div>
+    <p class="back"><a href="/portfolio">cd ..</a></p>
+  </article>
+</Base>
+
+<style>
+  .draft-banner {
+    margin: 0 0 32px;
+    padding: 12px 16px;
+    border: 1px dashed var(--accent);
+    border-radius: 6px;
+    color: var(--fg-soft);
+    font-size: 14px;
+  }
+
+  .draft-banner strong {
+    color: var(--accent);
+  }
+
+  .back {
+    margin: 40px 0 0;
+  }
+</style>

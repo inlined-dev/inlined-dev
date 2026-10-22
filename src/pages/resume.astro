@@ -1,0 +1,36 @@
+---
+import Base from "../layouts/Base.astro";
+import { Content as Resume } from "../content/resume.md";
+---
+
+<Base title="Resume" description="Resume of Thomas Bouldin, engineering leader for developer platforms.">
+  <div class="resume">
+    <div class="actions no-print">
+      <p class="prompt">cat resume.md</p>
+      <ul class="chips" aria-label="Other formats">
+        <li><a href="/resume.pdf">download .pdf</a></li>
+        <li><a href="/resume.md">raw .md</a></li>
+        <li><a href="javascript:window.print()">print</a></li>
+      </ul>
+    </div>
+    <article class="prose">
+      <Resume />
+    </article>
+  </div>
+</Base>
+
+<style>
+  .resume {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+</style>
