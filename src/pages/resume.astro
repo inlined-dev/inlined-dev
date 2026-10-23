@@ -307,16 +307,16 @@ const contacts = [
       break-inside: auto;
     }
 
-    .resume-doc :global(ul ul) {
+    .resume-doc :global(ul:not(.contact) ul) {
       margin-top: 1pt;
       color: var(--soft);
     }
 
-    .resume-doc :global(ul ul > li) {
+    .resume-doc :global(ul:not(.contact) ul > li) {
       margin-top: 1pt;
     }
 
-    .resume-doc :global(ul ul > li::before) {
+    .resume-doc :global(ul:not(.contact) ul > li::before) {
       content: "–";
       left: 0;
       top: 0;
