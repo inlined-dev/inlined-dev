@@ -1,10 +1,11 @@
 ---
 import Base from "../layouts/Base.astro";
 import { Content as Bio } from "../content/bio.md";
-import { getPosts, getProjects, formatDate, isoDate } from "../lib/content";
+import { getPosts, getProjects, getTalks, talkHref, formatDate, formatTalkDate, isoDate } from "../lib/content";
 
 const posts = (await getPosts()).slice(0, 3);
 const projects = (await getProjects()).slice(0, 3);
+const talks = (await getTalks()).slice(0, 3);
 
 const links = [
   { label: "github/inlined", href: "https://github.com/inlined" },
@@ -75,6 +76,25 @@ const links = [
         )}
         <a class="more" href="/portfolio">everything</a>
       </section>
+
+      <section class="panel" aria-labelledby="speaking">
+        <h2 id="speaking">ls -lt talks/ | head -3</h2>
+        {talks.length > 0 ? (
+          <ul class="entry-list">
+            {talks.map((talk) => (
+              <li>
+                <a href={talkHref(talk) ?? "/talks"}>{talk.data.title}</a>
+                <span class="meta">
+                  {talk.data.event} · <time datetime={isoDate(talk.data.date)}>{formatTalkDate(talk)}</time>
+                </span>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p class="empty">talks/: nothing here yet</p>
+        )}
+        <a class="more" href="/talks">all talks</a>
+      </section>
     </div>
   </div>
 </Base>
@@ -120,6 +140,6 @@ const links = [
   .panels {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 32px;
+    gap: 24px;
   }
 </style>

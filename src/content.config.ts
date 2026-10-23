@@ -34,4 +34,27 @@ const portfolio = defineCollection({
   }),
 });
 
-export const collections = { blog, portfolio };
+/**
+ * Talks: one file per talk. `date` sorts the list; set `when` to override how
+ * the date is shown when only the month or year is known ("Nov 2013").
+ * A talk with body text below the front matter gets its own page; one without
+ * links straight to its video or slides from the listing.
+ */
+const talks = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/talks" }),
+  schema: z.object({
+    title: z.string(),
+    event: z.string(),
+    date: z.coerce.date(),
+    when: z.string().optional(),
+    location: z.string().optional(),
+    with: z.array(z.string()).default([]),
+    video: z.string().url().optional(),
+    slides: z.string().url().optional(),
+    url: z.string().url().optional(),
+    summary: z.string().optional(),
+    draft: z.boolean().default(false),
+  }),
+});
+
+export const collections = { blog, portfolio, talks };

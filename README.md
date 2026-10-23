@@ -23,6 +23,7 @@ The PDF step drives headless Chromium through Playwright. On a fresh machine run
 | Resume | `src/content/resume.md` | `/resume` (rendered), `/resume.md` (raw), `/resume.pdf` |
 | Blog posts | `src/content/blog/<slug>/index.md` or `src/content/blog/<slug>.md` | `/blog`, `/blog/<slug>` |
 | Portfolio entries | `src/content/portfolio/<slug>/index.md` or `src/content/portfolio/<slug>.md` | `/portfolio`, `/portfolio/<slug>` |
+| Talks | `src/content/talks/<slug>.md` | `/talks`, `/talks/<slug>` (only talks with notes) |
 | RSS feed (full content) | generated from published posts | `/rss.xml` |
 | Social links | `links` array in `src/pages/index.astro` | `/` |
 | Other static files | `public/` | `/<file-name>` |
@@ -87,6 +88,28 @@ Body in Markdown.
 ```
 
 Entries sort by `order` (lowest first), then title. There is deliberately no date or year field. The first three appear in the nav dropdown and on the front page. `draft: true` works the same way as for posts.
+
+## Adding a talk
+
+One file per talk under `src/content/talks/`:
+
+```md
+---
+title: "Full stack in a stackless world"
+event: "O'Reilly Fluent 2018"
+date: 2018-06-13
+when: "Jun 2018"            # optional display override when only the month or year is known
+location: "San Jose, CA"    # optional
+with: ["Sarah Allen"]       # optional co-speakers
+video: "https://www.youtube.com/watch?v=..."   # optional
+slides: "https://www.slideshare.net/..."       # optional
+url: "https://..."          # optional event or session page
+summary: "One line on what the talk covered."
+draft: false
+---
+```
+
+Talks sort by `date` and are grouped by year on `/talks`. The listing links straight out to the video, slides, or event page. If you add body text below the front matter (an abstract, notes, photos in a folder beside an `index.md`), the talk gets its own page at `/talks/<slug>` and the listing links there instead. The three most recent talks appear in the nav dropdown and on the front page.
 
 ## Updating the resume
 
