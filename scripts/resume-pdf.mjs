@@ -73,9 +73,9 @@ try {
   await page.evaluate(() => document.fonts.ready);
   await page.pdf({
     path: output,
-    format: "Letter",
+    // Page size and margins come from the resume page's @page rule.
+    preferCSSPageSize: true,
     printBackground: true,
-    margin: { top: "0.6in", right: "0.7in", bottom: "0.6in", left: "0.7in" },
   });
   const size = (await readFile(output)).length;
   console.log(`resume-pdf: wrote ${output} (${(size / 1024).toFixed(0)} KB)`);

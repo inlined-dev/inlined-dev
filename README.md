@@ -113,7 +113,7 @@ Talks sort by `date` and are grouped by year on `/talks`. The listing links stra
 
 ## Updating the resume
 
-Edit `src/content/resume.md`. The rendered page, the raw `.md`, and the PDF are all produced from that one file at build time, so they never drift. The PDF uses the print stylesheet (light background, no nav); `npm run build:pdf` regenerates it after `npm run build:site`.
+Edit `src/content/resume.md`. Its front matter (`candidate`, `summary`, `email`, `website`, `github`, `linkedin`) becomes the header. Role headings use `Organization · Title · dates`; the page bolds the organization and right-aligns the dates. The rendered page, the raw `.md`, and the PDF are all produced from that one file at build time, so they never drift. The PDF uses the print stylesheet (light background, no nav); `npm run build:pdf` regenerates it after `npm run build:site`.
 
 ## Syndicating posts elsewhere
 
