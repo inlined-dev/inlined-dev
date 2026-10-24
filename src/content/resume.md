@@ -39,7 +39,7 @@ Parse Developer Day · F8 · Google I/O (5x) · Google Cloud Next (2x) · Fireba
   - Every quarterly anonymous survey on psychological safety, belonging, and purpose was 90-100% positive
   - Mentored the team to higher promotion rates than peer teams
 - Technical lead of Firebase Functions from V2 planning to release, then handed off to mentee
-  - Mitigated a date-driven launch without feature parity, shipping stopgaps and features in understaffed partner teams
+  - Mitigated date-driven launch without feature parity, shipping stopgaps and features for understaffed partners
   - Drove independent memory and CPU, which [Forrester cited](https://cloud.google.com/blog/products/serverless/leading-in-2023-forrester-functions-as-a-service-wave/) along with Firebase integrations when naming Google a FaaS Leader
   - Created infrastructure, contract, and checklist for new languages, leading to Python and Dart support
 
