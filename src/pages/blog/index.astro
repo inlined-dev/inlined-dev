@@ -1,0 +1,47 @@
+---
+import Base from "../../layouts/Base.astro";
+import { getPosts, formatDate, isoDate } from "../../lib/content";
+
+const posts = await getPosts();
+---
+
+<Base title="Blog" description="Writing by Thomas Bouldin.">
+  <div class="index">
+    <p class="prompt">ls -lt blog/</p>
+    <h1>Blog</h1>
+    {posts.length > 0 ? (
+      <ol class="listing" reversed>
+        {posts.map((post) => (
+          <li>
+            <time datetime={isoDate(post.data.date)}>{formatDate(post.data.date)}</time>
+            <div class="entry">
+              <a href={`/blog/${post.id}`}>{post.data.title}</a>
+              <span class="meta">{post.data.summary}</span>
+            </div>
+          </li>
+        ))}
+      </ol>
+    ) : (
+      <p class="empty">blog/: no posts yet</p>
+    )}
+    <p class="feed"><a href="/rss.xml">rss feed</a></p>
+  </div>
+</Base>
+
+<style>
+  .index {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  h1 {
+    margin: 0;
+    font-size: 36px;
+  }
+
+  .feed {
+    margin: 0;
+    color: var(--muted);
+  }
+</style>

@@ -1,0 +1,67 @@
+---
+import { render } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import { getAllTalks, hasWriteup, formatTalkDate, isoDate } from "../../lib/content";
+
+export async function getStaticPaths() {
+  // Only talks with body text get a page; the rest link out from /talks.
+  // Drafts get a page too (for proofreading); they just stay out of listings.
+  const talks = (await getAllTalks()).filter(hasWriteup);
+  return talks.map((talk) => ({ params: { slug: talk.id }, props: { talk } }));
+}
+
+const { talk } = Astro.props;
+const { Content } = await render(talk);
+const { title, event, location, video, slides, url, summary, draft } = talk.data;
+const description = summary ?? `${title}, a talk at ${event}.`;
+---
+
+<Base title={title} description={description} noindex={draft}>
+  <article>
+    {draft && (
+      <p class="draft-banner no-print">
+        <strong>draft</strong> · this talk is unlisted. Anyone with the link can read it; it is not in the talks index or the nav.
+      </p>
+    )}
+    <header class="article-head">
+      <p class="prompt">cat talks/{talk.id}.md</p>
+      <h1>{title}</h1>
+      <p class="meta">
+        {event}
+        {location && <> · {location}</>}
+        {" · "}<time datetime={isoDate(talk.data.date)}>{formatTalkDate(talk)}</time>
+        {talk.data.with.length > 0 && <> · with {talk.data.with.join(", ")}</>}
+      </p>
+      {(video || slides || url) && (
+        <ul class="chips" aria-label="Links">
+          {video && <li><a href={video}>video ↗</a></li>}
+          {slides && <li><a href={slides}>slides ↗</a></li>}
+          {url && <li><a href={url}>event page ↗</a></li>}
+        </ul>
+      )}
+    </header>
+    <div class="prose">
+      <Content />
+    </div>
+    <p class="back"><a href="/talks">cd ..</a></p>
+  </article>
+</Base>
+
+<style>
+  .draft-banner {
+    margin: 0 0 32px;
+    padding: 12px 16px;
+    border: 1px dashed var(--accent);
+    border-radius: 6px;
+    color: var(--fg-soft);
+    font-size: 14px;
+  }
+
+  .draft-banner strong {
+    color: var(--accent);
+  }
+
+  .back {
+    margin: 40px 0 0;
+  }
+</style>

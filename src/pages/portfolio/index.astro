@@ -1,0 +1,40 @@
+---
+import Base from "../../layouts/Base.astro";
+import { getProjects } from "../../lib/content";
+
+const projects = await getProjects();
+---
+
+<Base title="Portfolio" description="Things Thomas Bouldin has built or led.">
+  <div class="index">
+    <p class="prompt">ls -l portfolio/</p>
+    <h1>Portfolio</h1>
+    {projects.length > 0 ? (
+      <ul class="listing">
+        {projects.map((project) => (
+          <li>
+            <div class="entry">
+              <a href={`/portfolio/${project.id}`}>{project.data.title}</a>
+              <span class="meta">{project.data.role ? `${project.data.role} · ` : ""}{project.data.summary}</span>
+            </div>
+          </li>
+        ))}
+      </ul>
+    ) : (
+      <p class="empty">portfolio/: nothing here yet</p>
+    )}
+  </div>
+</Base>
+
+<style>
+  .index {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  h1 {
+    margin: 0;
+    font-size: 36px;
+  }
+</style>
