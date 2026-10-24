@@ -120,6 +120,17 @@ const contacts = [
     font-size: 15px;
   }
 
+  .resume-doc :global(h2 a) {
+    margin-left: 8px;
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--muted);
+  }
+
+  .resume-doc :global(h2 a:hover) {
+    color: var(--accent-hover);
+  }
+
   /* ---------- Print: two-page resume layout ---------- */
 
   @media print {
@@ -183,7 +194,10 @@ const contacts = [
 
     .contact {
       flex-shrink: 0;
-      gap: 0.5pt;
+      display: grid;
+      grid-template-columns: repeat(2, auto);
+      column-gap: 14pt;
+      row-gap: 1pt;
       font-size: 8.8pt;
       text-align: right;
       color: var(--soft);
@@ -194,7 +208,7 @@ const contacts = [
     }
 
     .resume-doc :global(h2) {
-      margin: 16pt 0 5pt;
+      margin: 20pt 0 5pt;
       padding: 0;
       border: 0;
       font-size: 8.4pt;
@@ -207,6 +221,15 @@ const contacts = [
 
     .resume-head + :global(h2) {
       margin-top: 9pt;
+    }
+
+    .resume-doc :global(h2 a) {
+      margin-left: 4pt;
+      text-transform: none;
+      letter-spacing: 0;
+      font-weight: 400;
+      color: var(--dim);
+      text-decoration: none;
     }
 
     .resume-doc :global(h2::before),
@@ -227,7 +250,7 @@ const contacts = [
     }
 
     .resume-doc :global(h3) {
-      margin-top: 12pt;
+      margin-top: 16pt;
       font-size: 10.6pt;
       font-weight: 650;
     }
@@ -237,7 +260,7 @@ const contacts = [
     }
 
     .resume-doc :global(h4) {
-      margin-top: 7pt;
+      margin-top: 11pt;
       font-size: 9.6pt;
       font-weight: 600;
     }
@@ -287,20 +310,13 @@ const contacts = [
 
     .resume-doc :global(ul:not(.contact) > li) {
       position: relative;
-      margin: 3pt 0 0;
-      padding-left: 11pt;
+      margin: 4pt 0 0;
+      padding-left: 0;
       break-inside: avoid;
     }
 
     .resume-doc :global(ul:not(.contact) > li::before) {
-      content: "";
-      position: absolute;
-      left: 2pt;
-      top: 0.52em;
-      width: 3.4pt;
-      height: 3.4pt;
-      border-radius: 50%;
-      background: var(--accent);
+      content: none;
     }
 
     .resume-doc :global(li:has(ul)) {
@@ -314,10 +330,12 @@ const contacts = [
 
     .resume-doc :global(ul:not(.contact) ul > li) {
       margin-top: 1pt;
+      padding-left: 11pt;
     }
 
     .resume-doc :global(ul:not(.contact) ul > li::before) {
       content: "–";
+      position: absolute;
       left: 0;
       top: 0;
       width: auto;
