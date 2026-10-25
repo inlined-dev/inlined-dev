@@ -78,13 +78,13 @@ Parse Developer Day · F8 · Google I/O (5x) · Google Cloud Next (2x) · Fireba
 ### Microsoft · Software Development Engineer II · 2007 - 2010
 - Built a general-purpose app-streaming prototype for Windows, earning four patents
   - Discovered OS integration points and remapped them so the host saw apps living inside the image
-  - Invented a ZIP extension for random block-aligned fetches; a file system driver made images appear instantly while streaming
+  - Invented a ZIP extension for random block-aligned fetches and a file system driver to stream images on demand
   - Matched [Office Click-to-Run](https://www.techtarget.com/enterprise-software/definition/Microsoft-Click-To-Run) capabilities and SLA without being built for Office
 
 ## Beyond 9-5
 - **Memelord**: a second-screen party game for communities' inside jokes, built with an AI-first solo SDLC
   - Multi-stage AI pipeline for iterative creative writing assistance, addressing safety, novelty, and diversity
-- **Scuba**: PADI IDC Staff Instructor (inactive since 2025) with over 100 certifications, leading in life-critical situations
+- **Scuba**: PADI IDC Staff Instructor (inactive since H2 2025) with 100+ certifications, leading in life-critical situations
 
 ## Education
 B.S. Software Engineering, California Polytechnic State University, San Luis Obispo
