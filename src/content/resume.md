@@ -67,8 +67,8 @@ Parse Developer Day · F8 · Google I/O (5x) · Google Cloud Next (2x) · Fireba
 #### Pre-acquisition · Software Engineer · 2012 - 2013
 - Seventh non-founder hire, working across infrastructure, the iOS and Android SDKs, and push
 - Addressed bugs and constraints of early mobile platforms
-  - Identified an error at the kernel handoff in iOS and wrote a new HTTP library to address
-  - Implemented mmap extension to NSData to make memory not count against strict limits
+  - Traced file upload failures on cellular to an error in iOS' networking library and built a replacement
+  - Invented mmap extension to NSData allowing Parse blobs to not count against iOS RAM limits
   - Debugged and addressed impossible exceptions thrown from Android drivers
 - Implemented novel features such as [native subclassing](https://web.archive.org/web/20130328051110/http://blog.parse.com/2013/03/22/stay-classy-objective-c-introducing-native-subclasses-for-parse-objects/) and [recipient-local scheduled push notifications](https://web.archive.org/web/20150320055432/http://blog.parse.com/2012/11/14/local-push-because-its-5-oclock-somewhere)
 
