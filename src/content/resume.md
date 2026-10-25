@@ -22,11 +22,11 @@ Parse Developer Day · F8 · Google I/O (5x) · Google Cloud Next (2x) · Fireba
   - Redesigned HTTP bindings so switching frameworks takes one line of code and middleware works everywhere
   - Built Next.js support, rebuilt Express and Firebase Functions support on new design, and hardened streaming
   - Made Genkit telemetry work on App Hosting with zero configuration
-- Shape platform-wide strategy across organizations and specialties
+- Shaping platform-wide strategy across organizations and specialties
   - Led serverless capacity de-growth and reclamation ahead of urgent constraints, triaging each partner
   - Coordinated abuse mitigation strategies with platform leaders, legal, privacy, and government agencies
   - Built process and tooling for vulnerability triage and burndown
-  - Negotiated Google Cloud Platform requirements that unblock Firebase fleet consolidation
+  - Negotiated Google Cloud Platform requirements to unblock Firebase fleet consolidation
   - Wrote the playbook for exposing Cloud Run features in App Hosting, proven with VPC and always-on CPU
 - Driving org-wide AI SDLC and developer-empathy work, using a production side project to find gaps
 
@@ -52,10 +52,10 @@ Parse Developer Day · F8 · Google I/O (5x) · Google Cloud Next (2x) · Fireba
 #### Firebase · Senior Software Engineer (L5) · 2015 - 2017
 - Proposed, staffed, and led Firebase Functions, delivering every planned integration across four orgs on schedule
 - Built the Realtime Database event pipeline, generalized it, and worked with four launch partners to integrate
-- Firebase Realtime Database reliability
+- Improved Realtime Database reliability
   - Built MongoDB observability dashboards and trained the team on its performance
   - Migrated the fleet with zero downtime under LTS pressure, proving an N² regression to MongoDB from source
-- Feature improvements such as promise support and atomic counters
+- Added features such as promise support and atomic counters
 
 ### Parse
 #### After Facebook acquisition · Senior Software Engineer (L5) · 2013 - 2015
@@ -82,10 +82,9 @@ Parse Developer Day · F8 · Google I/O (5x) · Google Cloud Next (2x) · Fireba
   - Matched [Office Click-to-Run](https://www.techtarget.com/enterprise-software/definition/Microsoft-Click-To-Run) capabilities and SLA without being built for Office
 
 ## Beyond 9-5
-- **Memelord**:
-  - A second-screen party game for communities' inside jokes, built with an AI-first solo SDLC
-  - Complex AI pipeline for iterative creative writing assistance, considering safety, novelty, and clustering
-- **Scuba**: (Inactive 2025) PADI IDC Staff Instructor with over 100 certifications, leading in life-critical situations
+- **Memelord**: a second-screen party game for communities' inside jokes, built with an AI-first solo SDLC
+  - Multi-stage AI pipeline for iterative creative writing assistance, addressing safety, novelty, and diversity
+- **Scuba**: PADI IDC Staff Instructor (inactive since 2025) with over 100 certifications, leading in life-critical situations
 
 ## Education
 B.S. Software Engineering, California Polytechnic State University, San Luis Obispo
