@@ -69,8 +69,7 @@ Parse Developer Day · F8 · Google I/O (5x) · Google Cloud Next (2x) · Fireba
 - Addressed bugs and constraints of early mobile platforms
   - Traced file upload failures on cellular to an error in iOS' networking library and built a replacement
   - Invented mmap extension to NSData allowing Parse blobs to not count against iOS RAM limits
-  - Diagnosed carriers dropping push connections without a FIN; added bidirectional heartbeats to the protocol
-  - Debugged and addressed "impossible" undeclared exceptions thrown from Android modem drivers
+  - Debugged driver and protocol issues in custom Android push network
 - Implemented novel features such as [native subclassing](https://web.archive.org/web/20130328051110/http://blog.parse.com/2013/03/22/stay-classy-objective-c-introducing-native-subclasses-for-parse-objects/) and [recipient-local scheduled push notifications](https://web.archive.org/web/20150320055432/http://blog.parse.com/2012/11/14/local-push-because-its-5-oclock-somewhere)
 
 ### Google · Software Engineer III (L4) · 2010 - 2012
