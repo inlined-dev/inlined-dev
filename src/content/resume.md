@@ -80,7 +80,7 @@ Parse Developer Day · F8 · Google I/O (5x) · Google Cloud Next (2x) · Fireba
 
 ## Beyond 9-5
 - **Memelord**: a second-screen party game for communities' inside jokes, built with an AI-first solo SDLC
-- **Scuba**: PADI IDC Staff Instructor with over 100 certifications, leading in life-critical situations
+- **Scuba**: PADI IDC Staff Instructor (inactive) with over 100 certifications, leading in life-critical situations
 
 ## Education
 B.S. Software Engineering, California Polytechnic State University, San Luis Obispo
