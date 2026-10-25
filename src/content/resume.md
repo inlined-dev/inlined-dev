@@ -66,11 +66,11 @@ Parse Developer Day · F8 · Google I/O (5x) · Google Cloud Next (2x) · Fireba
 
 #### Pre-acquisition · Software Engineer · 2012 - 2013
 - Seventh non-founder hire, working across infrastructure, the iOS and Android SDKs, and push
-- Traced failed cellular uploads to iOS's HTTP stack mishandling partial writes; replaced it with a streaming library
-- Backed iOS file data with mmap so it counted as clean, evictable memory outside the app's tight RAM limit
-- Added [native subclassing](https://web.archive.org/web/20130328051110/http://blog.parse.com/2013/03/22/stay-classy-objective-c-introducing-native-subclasses-for-parse-objects/) to the iOS SDK so apps could use typed model classes
-- Hardened the Android push client against modem drivers throwing exceptions Java declared impossible
-- Implemented [recipient-local scheduled push notifications](https://web.archive.org/web/20150320055432/http://blog.parse.com/2012/11/14/local-push-because-its-5-oclock-somewhere)
+- Addressed bugs and constraints of early mobile platforms
+  - Identified an error at the kernel handoff in iOS and wrote a new HTTP library to address
+  - Implemented mmap extension to NSData to make memory not count against strict limits
+  - Debugged and addressed impossible exceptions thrown from Android drivers
+- Implemented novel features such as [native subclassing](https://web.archive.org/web/20130328051110/http://blog.parse.com/2013/03/22/stay-classy-objective-c-introducing-native-subclasses-for-parse-objects/) and [recipient-local scheduled push notifications](https://web.archive.org/web/20150320055432/http://blog.parse.com/2012/11/14/local-push-because-its-5-oclock-somewhere)
 
 ### Google · Software Engineer III (L4) · 2010 - 2012
 - Scaled Image Search indexing by migrating it to [Percolator](https://tikv.org/deep-dive/distributed-transaction/percolator/)
