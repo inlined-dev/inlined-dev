@@ -65,8 +65,10 @@ Parse Developer Day · F8 · Google I/O (5x) · Google Cloud Next (2x) · Fireba
 - Coordinated with Ops teams to improve reliability, observability, and performance, especially in the data layer
 
 #### Pre-acquisition · Software Engineer · 2012 - 2013
-- Seventh non-founder hire, focused on infrastructure and SDKs
-- Built iOS SDK internals: mmap-backed file storage, large cellular uploads, and [native subclassing](https://web.archive.org/web/20130328051110/http://blog.parse.com/2013/03/22/stay-classy-objective-c-introducing-native-subclasses-for-parse-objects/)
+- Seventh non-founder hire, working across infrastructure, the iOS and Android SDKs, and push
+- Traced failed cellular uploads to iOS's HTTP stack mishandling partial writes; replaced it with a streaming library
+- Built iOS SDK internals: mmap-backed file storage and [native subclassing](https://web.archive.org/web/20130328051110/http://blog.parse.com/2013/03/22/stay-classy-objective-c-introducing-native-subclasses-for-parse-objects/)
+- Hardened the Android push client against modem drivers throwing exceptions Java declared impossible
 - Implemented [recipient-local scheduled push notifications](https://web.archive.org/web/20150320055432/http://blog.parse.com/2012/11/14/local-push-because-its-5-oclock-somewhere)
 
 ### Google · Software Engineer III (L4) · 2010 - 2012
