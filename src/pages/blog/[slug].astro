@@ -1,0 +1,59 @@
+---
+import { render } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import { getAllPosts, formatDate, isoDate } from "../../lib/content";
+
+export async function getStaticPaths() {
+  // Drafts get a page too (for proofreading); they just stay out of listings.
+  const posts = await getAllPosts();
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+
+<Base title={post.data.title} description={post.data.summary} noindex={post.data.draft}>
+  <article>
+    {post.data.draft && (
+      <p class="draft-banner no-print">
+        <strong>draft</strong> · this post is unlisted. Anyone with the link can read it; it is not in the blog index, the nav, or the feed.
+      </p>
+    )}
+    <header class="article-head">
+      <p class="prompt">cat blog/{post.id}.md</p>
+      <h1>{post.data.title}</h1>
+      <p class="meta">
+        <time datetime={isoDate(post.data.date)}>{formatDate(post.data.date)}</time>
+      </p>
+      {post.data.tags.length > 0 && (
+        <ul class="chips" aria-label="Tags">
+          {post.data.tags.map((tag) => <li><span>{tag}</span></li>)}
+        </ul>
+      )}
+    </header>
+    <div class="prose">
+      <Content />
+    </div>
+    <p class="back"><a href="/blog">cd ..</a></p>
+  </article>
+</Base>
+
+<style>
+  .draft-banner {
+    margin: 0 0 32px;
+    padding: 12px 16px;
+    border: 1px dashed var(--accent);
+    border-radius: 6px;
+    color: var(--fg-soft);
+    font-size: 14px;
+  }
+
+  .draft-banner strong {
+    color: var(--accent);
+  }
+
+  .back {
+    margin: 40px 0 0;
+  }
+</style>

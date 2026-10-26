@@ -1,0 +1,359 @@
+---
+import Base from "../layouts/Base.astro";
+import { experimental_AstroContainer as AstroContainer } from "astro/container";
+import { Content as Resume, frontmatter } from "../content/resume.md";
+import { splitResumeHeadings } from "../lib/resume-headings";
+
+const container = await AstroContainer.create();
+const body = splitResumeHeadings(await container.renderToString(Resume));
+
+const { candidate, summary, email, website, github, linkedin } = frontmatter;
+const display = (url: string) => url.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "");
+const contacts = [
+  website && { label: display(website), href: website },
+  email && { label: email, href: `mailto:${email}` },
+  github && { label: display(github), href: github },
+  linkedin && { label: display(linkedin), href: linkedin },
+].filter(Boolean) as { label: string; href: string }[];
+---
+
+<Base title="Resume" description={`Resume of ${candidate}. ${summary ?? ""}`.trim()}>
+  <div class="resume">
+    <div class="actions no-print">
+      <p class="prompt">cat resume.md</p>
+      <ul class="chips" aria-label="Other formats">
+        <li><a href="/resume.pdf">download .pdf</a></li>
+        <li><a href="/resume.md">raw .md</a></li>
+      </ul>
+    </div>
+    <article class="resume-doc prose">
+      <header class="resume-head">
+        <div class="who">
+          <h1>{candidate}</h1>
+          {summary && <p class="headline">{summary}</p>}
+        </div>
+        <ul class="contact" aria-label="Contact">
+          {contacts.map((c) => <li><a href={c.href}>{c.label}</a></li>)}
+        </ul>
+      </header>
+      <Fragment set:html={body} />
+    </article>
+  </div>
+</Base>
+
+<style>
+  .resume {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  /* ---------- Screen: terminal theme ---------- */
+
+  .resume-doc {
+    max-width: 860px;
+  }
+
+  .resume-head {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 16px 32px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--line-strong);
+    margin-bottom: 8px;
+  }
+
+  .resume-head h1 {
+    margin: 0;
+    font-size: clamp(28px, 5vw, 40px);
+  }
+
+  .headline {
+    margin: 8px 0 0;
+    max-width: 52ch;
+    color: var(--fg-soft);
+  }
+
+  .contact {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    font-size: 14px;
+  }
+
+  .resume-doc :global(.entry-head) {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 2px 16px;
+  }
+
+  /* Keep the "### " prompt inside the label so it doesn't become a third flex item. */
+  .resume-doc :global(h3.entry-head::before) {
+    content: none;
+  }
+
+  .resume-doc :global(h3.entry-head .label::before) {
+    content: "### ";
+    color: var(--prompt);
+  }
+
+  .resume-doc :global(.entry-head .role) {
+    margin-left: 0.6em;
+    font-weight: 400;
+    color: var(--fg-soft);
+  }
+
+  .resume-doc :global(.entry-head .dates) {
+    font-weight: 400;
+    font-size: 14px;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  .resume-doc :global(h4) {
+    margin: 20px 0 8px;
+    font-size: 15px;
+  }
+
+  .resume-doc :global(h2 a) {
+    margin-left: 8px;
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--muted);
+  }
+
+  .resume-doc :global(h2 a:hover) {
+    color: var(--accent-hover);
+  }
+
+  /* ---------- Print: two-page resume layout ---------- */
+
+  @media print {
+    @page {
+      size: Letter;
+      margin: 0.55in 0.6in 0.5in;
+    }
+
+    .resume {
+      gap: 0;
+    }
+
+    .resume-doc {
+      --ink: #16181d;
+      --soft: #3b4049;
+      --dim: #6b7280;
+      --rule: #d9dce1;
+      --accent: #1f4e8c;
+      max-width: none;
+      font-family: Inter, "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 9.6pt;
+      line-height: 1.42;
+      color: var(--ink);
+      font-feature-settings: "tnum" 1, "cv11" 1;
+    }
+
+    .resume-doc :global(a) {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .resume-doc :global(li a),
+    .resume-doc :global(p a) {
+      text-decoration: underline;
+      text-decoration-color: var(--rule);
+      text-underline-offset: 2pt;
+    }
+
+    .resume-head {
+      flex-wrap: nowrap;
+      gap: 24pt;
+      padding-bottom: 8pt;
+      margin-bottom: 0;
+      border-bottom: 1.5pt solid var(--accent);
+    }
+
+    .resume-head h1 {
+      font-size: 23pt;
+      font-weight: 650;
+      letter-spacing: -0.02em;
+      line-height: 1.05;
+      color: var(--ink);
+    }
+
+    .headline {
+      margin-top: 3pt;
+      max-width: none;
+      font-size: 10pt;
+      color: var(--soft);
+    }
+
+    .contact {
+      flex-shrink: 0;
+      display: grid;
+      grid-template-columns: repeat(2, auto);
+      column-gap: 14pt;
+      row-gap: 1pt;
+      font-size: 8.8pt;
+      text-align: right;
+      color: var(--soft);
+    }
+
+    .contact a {
+      text-decoration: none !important;
+    }
+
+    .resume-doc :global(h2) {
+      margin: 20pt 0 5pt;
+      padding: 0;
+      border: 0;
+      font-size: 8.4pt;
+      font-weight: 650;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      break-after: avoid;
+    }
+
+    .resume-head + :global(h2) {
+      margin-top: 9pt;
+    }
+
+    .resume-doc :global(h2 a) {
+      margin-left: 4pt;
+      text-transform: none;
+      letter-spacing: 0;
+      font-weight: 400;
+      color: var(--dim);
+      text-decoration: none;
+    }
+
+    .resume-doc :global(h2::before),
+    .resume-doc :global(h3::before),
+    .resume-doc :global(h3.entry-head .label::before) {
+      content: none;
+    }
+
+    .resume-doc :global(h3),
+    .resume-doc :global(h4) {
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12pt;
+      margin: 0;
+      color: var(--ink);
+      break-after: avoid;
+    }
+
+    .resume-doc :global(h3) {
+      margin-top: 16pt;
+      font-size: 10.6pt;
+      font-weight: 650;
+    }
+
+    .resume-doc :global(h2 + h3) {
+      margin-top: 2pt;
+    }
+
+    .resume-doc :global(h4) {
+      margin-top: 11pt;
+      font-size: 9.6pt;
+      font-weight: 600;
+    }
+
+    .resume-doc :global(h3 + h4) {
+      margin-top: 2pt;
+    }
+
+    .resume-doc :global(.entry-head .role) {
+      margin-left: 6pt;
+      font-weight: 400;
+      color: var(--dim);
+    }
+
+    .resume-doc :global(h4 .org) {
+      color: var(--dim);
+      font-weight: 500;
+    }
+
+    .resume-doc :global(h4 .role) {
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    .resume-doc :global(.entry-head .dates) {
+      font-size: 9pt;
+      font-weight: 400;
+      color: var(--dim);
+    }
+
+    .resume-doc :global(p) {
+      margin: 0;
+      color: var(--soft);
+    }
+
+    .resume-doc :global(strong) {
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    .resume-doc :global(ul:not(.contact)) {
+      list-style: none;
+      margin: 2pt 0 0;
+      padding: 0;
+      color: var(--ink);
+    }
+
+    .resume-doc :global(ul:not(.contact) > li) {
+      position: relative;
+      margin: 4pt 0 0;
+      padding-left: 0;
+      break-inside: avoid;
+    }
+
+    .resume-doc :global(ul:not(.contact) > li::before) {
+      content: none;
+    }
+
+    .resume-doc :global(li:has(ul)) {
+      break-inside: auto;
+    }
+
+    .resume-doc :global(ul:not(.contact) ul) {
+      margin-top: 1pt;
+      color: var(--soft);
+    }
+
+    .resume-doc :global(ul:not(.contact) ul > li) {
+      margin-top: 1pt;
+      padding-left: 11pt;
+    }
+
+    .resume-doc :global(ul:not(.contact) ul > li::before) {
+      content: "–";
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: auto;
+      height: auto;
+      border-radius: 0;
+      background: none;
+      color: var(--dim);
+    }
+  }
+</style>

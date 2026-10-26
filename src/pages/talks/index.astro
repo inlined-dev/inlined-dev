@@ -1,0 +1,94 @@
+---
+import Base from "../../layouts/Base.astro";
+import { getTalks, groupTalksByYear, talkHref, hasWriteup, formatTalkDate, isoDate } from "../../lib/content";
+
+const talks = await getTalks();
+const years = groupTalksByYear(talks);
+---
+
+<Base title="Talks" description="Conference talks and meetups by Thomas Bouldin.">
+  <div class="index">
+    <p class="prompt">ls -lt talks/</p>
+    <h1>Talks</h1>
+    {years.length > 0 ? (
+      years.map(([year, group]) => (
+        <section class="year" aria-labelledby={`y${year}`}>
+          <h2 id={`y${year}`}>{year}</h2>
+          <ul class="listing">
+            {group.map((talk) => {
+              const href = talkHref(talk);
+              return (
+                <li>
+                  <time datetime={isoDate(talk.data.date)}>{formatTalkDate(talk)}</time>
+                  <div class="entry">
+                    {href ? <a href={href}>{talk.data.title}</a> : <span class="title">{talk.data.title}</span>}
+                    <span class="meta">
+                      {talk.data.event}
+                      {talk.data.location && <> · {talk.data.location}</>}
+                      {talk.data.with.length > 0 && <> · with {talk.data.with.join(", ")}</>}
+                    </span>
+                    {talk.data.summary && <span class="meta">{talk.data.summary}</span>}
+                    <span class="links">
+                      {hasWriteup(talk) && <a href={`/talks/${talk.id}`}>notes</a>}
+                      {talk.data.video && <a href={talk.data.video}>video ↗</a>}
+                      {talk.data.slides && <a href={talk.data.slides}>slides ↗</a>}
+                      {talk.data.url && <a href={talk.data.url}>event page ↗</a>}
+                    </span>
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
+        </section>
+      ))
+    ) : (
+      <p class="empty">talks/: nothing here yet</p>
+    )}
+  </div>
+</Base>
+
+<style>
+  .index {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  h1 {
+    margin: 0;
+    font-size: 36px;
+  }
+
+  .year {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 16px;
+  }
+
+  .year h2 {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--muted);
+  }
+
+  .year h2::before {
+    content: "# ";
+    color: var(--prompt);
+  }
+
+  .title {
+    color: var(--fg-strong);
+    font-weight: 500;
+    font-size: 17px;
+  }
+
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 4px;
+    font-size: 13px;
+  }
+</style>

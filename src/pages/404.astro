@@ -1,0 +1,34 @@
+---
+import Base from "../layouts/Base.astro";
+---
+
+<Base title="404" description="Page not found.">
+  <div class="missing">
+    <p class="prompt">cat {"{path}"}</p>
+    <h1>cat: no such file or directory</h1>
+    <p>Nothing lives at this address. Try <a href="/">~/inlined.dev</a>, the <a href="/blog">blog</a>, or the <a href="/portfolio">portfolio</a>.</p>
+  </div>
+</Base>
+
+<style>
+  .missing {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  h1 {
+    margin: 0;
+    font-size: 28px;
+  }
+
+  p {
+    margin: 0;
+    color: var(--fg-soft);
+  }
+</style>
+
+<script>
+  const slot = document.querySelector(".missing .prompt");
+  if (slot) slot.textContent = `cat ${location.pathname.replace(/^\//, "")}`;
+</script>
