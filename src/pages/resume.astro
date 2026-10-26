@@ -102,6 +102,16 @@ const contacts = [
     gap: 2px 16px;
   }
 
+  /* Keep the "### " prompt inside the label so it doesn't become a third flex item. */
+  .resume-doc :global(h3.entry-head::before) {
+    content: none;
+  }
+
+  .resume-doc :global(h3.entry-head .label::before) {
+    content: "### ";
+    color: var(--prompt);
+  }
+
   .resume-doc :global(.entry-head .role) {
     margin-left: 0.6em;
     font-weight: 400;
@@ -233,7 +243,8 @@ const contacts = [
     }
 
     .resume-doc :global(h2::before),
-    .resume-doc :global(h3::before) {
+    .resume-doc :global(h3::before),
+    .resume-doc :global(h3.entry-head .label::before) {
       content: none;
     }
 
