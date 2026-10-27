@@ -1,6 +1,6 @@
 ---
 title: "Google Cloud Functions and Firebase"
-event: "Google Cloud Next '17"
+event: "Google Cloud Next 2017"
 date: 2017-03-09
 location: "San Francisco, CA"
 with: ["Brendan Lim"]

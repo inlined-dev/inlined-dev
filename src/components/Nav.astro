@@ -1,5 +1,5 @@
 ---
-import { getPosts, getProjects, getTalks, talkHref, formatDate } from "../lib/content";
+import { getPosts, getProjects, getTalks, talkHref, talkEvent, formatDate } from "../lib/content";
 
 const posts = (await getPosts()).slice(0, 3);
 const projects = (await getProjects()).slice(0, 3);
@@ -50,7 +50,7 @@ const chevron = `<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="tr
           <summary>talks<Fragment set:html={chevron} /></summary>
           <div class="dropdown" role="list">
             {talks.map((talk) => (
-              <a role="listitem" href={talkHref(talk) ?? "/talks"}>{talk.data.title} <span class="hint">· {talk.data.event}</span></a>
+              <a role="listitem" href={talkHref(talk) ?? "/talks"}>{talkEvent(talk)} <span class="hint">· {talk.data.title}</span></a>
             ))}
             {talks.length === 0 && <span class="hint pad">nothing published yet</span>}
             <a role="listitem" class="all" href="/talks"><span class="cmd">ls</span> talks/ <span class="hint">· all talks</span></a>
@@ -130,7 +130,7 @@ const chevron = `<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="tr
     right: 0;
     z-index: 10;
     min-width: 300px;
-    max-width: calc(100vw - 32px);
+    max-width: min(460px, calc(100vw - 32px));
     background: var(--panel);
     border: 1px solid var(--line-strong);
     border-radius: 6px;

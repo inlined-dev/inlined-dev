@@ -1,7 +1,7 @@
 ---
 import Base from "../layouts/Base.astro";
 import { Content as Bio } from "../content/bio.md";
-import { getPosts, getProjects, getTalks, talkHref, formatDate, formatTalkDate, isoDate } from "../lib/content";
+import { getPosts, getProjects, getTalks, talkHref, talkEvent, formatDate, isoDate } from "../lib/content";
 
 const posts = (await getPosts()).slice(0, 3);
 const projects = (await getProjects()).slice(0, 3);
@@ -83,10 +83,8 @@ const links = [
           <ul class="entry-list">
             {talks.map((talk) => (
               <li>
-                <a href={talkHref(talk) ?? "/talks"}>{talk.data.title}</a>
-                <span class="meta">
-                  {talk.data.event} · <time datetime={isoDate(talk.data.date)}>{formatTalkDate(talk)}</time>
-                </span>
+                <a href={talkHref(talk) ?? "/talks"}>{talkEvent(talk)}</a>
+                <span class="meta">{talk.data.title}</span>
               </li>
             ))}
           </ul>

@@ -1,7 +1,7 @@
 ---
 import { render } from "astro:content";
 import Base from "../../layouts/Base.astro";
-import { getAllTalks, hasWriteup, formatTalkDate, isoDate } from "../../lib/content";
+import { getAllTalks, hasWriteup, talkEvent, formatTalkDate, isoDate } from "../../lib/content";
 
 export async function getStaticPaths() {
   // Only talks with body text get a page; the rest link out from /talks.
@@ -12,11 +12,12 @@ export async function getStaticPaths() {
 
 const { talk } = Astro.props;
 const { Content } = await render(talk);
-const { title, event, location, video, slides, url, summary, draft } = talk.data;
-const description = summary ?? `${title}, a talk at ${event}.`;
+const { title, location, video, slides, url, summary, draft } = talk.data;
+const heading = talkEvent(talk);
+const description = summary ?? `${title}, a talk at ${heading}.`;
 ---
 
-<Base title={title} description={description} noindex={draft}>
+<Base title={`${heading}: ${title}`} description={description} noindex={draft}>
   <article>
     {draft && (
       <p class="draft-banner no-print">
@@ -25,11 +26,11 @@ const description = summary ?? `${title}, a talk at ${event}.`;
     )}
     <header class="article-head">
       <p class="prompt">cat talks/{talk.id}.md</p>
-      <h1>{title}</h1>
+      <h1>{heading}</h1>
+      <p class="session">{title}</p>
       <p class="meta">
-        {event}
-        {location && <> · {location}</>}
-        {" · "}<time datetime={isoDate(talk.data.date)}>{formatTalkDate(talk)}</time>
+        {location && <>{location} · </>}
+        <time datetime={isoDate(talk.data.date)}>{formatTalkDate(talk)}</time>
         {talk.data.with.length > 0 && <> · with {talk.data.with.join(", ")}</>}
       </p>
       {(video || slides || url) && (
@@ -59,6 +60,12 @@ const description = summary ?? `${title}, a talk at ${event}.`;
 
   .draft-banner strong {
     color: var(--accent);
+  }
+
+  .session {
+    margin: 4px 0 0;
+    font-size: 18px;
+    color: var(--fg-soft);
   }
 
   .back {
