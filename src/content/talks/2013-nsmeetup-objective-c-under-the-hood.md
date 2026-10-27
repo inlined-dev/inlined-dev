@@ -1,7 +1,7 @@
 ---
 title: "Objective-C: Under the Hood"
 event: "NSMeetup"
-date: 2013-12-01
+date: 2013-12-09
 when: "2013"
 location: "San Francisco, CA"
 slides: "https://www.slideshare.net/ThomasBouldin/objectivec-under-the-hood"
