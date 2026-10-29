@@ -11,9 +11,15 @@ Personal site for Thomas Bouldin. Built with [Astro](https://astro.build), conte
 | `npm run build` | Build the site into `dist/` and generate `dist/resume.pdf` |
 | `npm run build:site` | Build without the PDF step |
 | `npm run preview` | Serve the built `dist/` locally |
-| `firebase deploy` | Deploy `dist/` to Firebase Hosting |
+| `firebase deploy` | Deploy `dist/` to Firebase Hosting by hand (pushes to `main` deploy automatically) |
 
 The PDF step drives headless Chromium through Playwright. On a fresh machine run `npx playwright install chromium` once, or set `CHROME_PATH` to an existing Chrome binary.
+
+## Deploying
+
+Every push to `main` builds the site and deploys it to Firebase Hosting (project `inlined-dev`) through `.github/workflows/deploy.yml`. Pull requests run the same build, without deploying, so a broken build shows up before merge.
+
+The workflow signs in to Google Cloud without a key, through Workload Identity Federation. `scripts/setup-cd.sh` sets that up once: a `github-deploy` service account that can only deploy Hosting, a provider that trusts only this repository's `main` branch, and the `WIF_PROVIDER` and `DEPLOY_SERVICE_ACCOUNT` repository variables the workflow reads.
 
 ## Where things live
 
