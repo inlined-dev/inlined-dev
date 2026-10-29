@@ -1,0 +1,16 @@
+---
+import { getEntries, type CollectionEntry } from "astro:content";
+
+/** A talk's co-presenters as " · with A, B", each name linked when it has a `url`. */
+interface Props {
+  people: CollectionEntry<"talks">["data"]["with"];
+}
+
+const people = await getEntries(Astro.props.people);
+---
+
+{people.length > 0 && (
+  <> · with {people.map((person, i) => (
+    <>{i > 0 && ", "}{person.data.url ? <a href={person.data.url}>{person.data.name}</a> : person.data.name}</>
+  ))}</>
+)}

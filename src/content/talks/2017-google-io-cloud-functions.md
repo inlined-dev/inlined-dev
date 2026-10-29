@@ -3,7 +3,7 @@ title: "What's Possible with Cloud Functions for Firebase"
 event: "Google I/O 2017"
 date: 2017-05-19
 location: "Mountain View, CA"
-with: ["Michael Bleigh"]
+with: [michael-bleigh]
 video: "https://www.youtube.com/watch?v=G-MBeEW92v4"
 summary: "A tour of real world examples of how to use Firebase Functions as glue in your application"
 ---
