@@ -115,7 +115,7 @@ draft: false
 ---
 ```
 
-Talks sort by `date` and are grouped by year on `/talks`. The listing links straight out to the video, slides, or event page. If you add body text below the front matter (an abstract, notes, photos in a folder beside an `index.md`), the talk gets its own page at `/talks/<slug>` and the listing links there instead. The three most recent talks appear in the nav dropdown and on the front page.
+Talks sort by `date` and are grouped by year on `/talks`. Listings and talk pages lead with the event and its year ("Google I/O 2025"), with the session title underneath; if `event` doesn't already contain a four-digit year, the year from `date` is appended. The listing links straight out to the video, slides, or event page. If you add body text below the front matter (an abstract, notes, photos in a folder beside an `index.md`), the talk gets its own page at `/talks/<slug>` and the listing links there instead. The three most recent talks appear in the nav dropdown and on the front page.
 
 ## Updating the resume
 

@@ -49,6 +49,15 @@ export function talkHref(talk: Talk) {
   return talk.data.video ?? talk.data.slides ?? talk.data.url;
 }
 
+/**
+ * How a talk is labelled in listings: the event with its year, e.g.
+ * "Google I/O 2025". Session titles are long, so they sit underneath.
+ */
+export function talkEvent(talk: Talk) {
+  const { event, date } = talk.data;
+  return /\b(19|20)\d{2}\b/.test(event) ? event : `${event} ${date.getUTCFullYear()}`;
+}
+
 /** Talks grouped by year, newest year first; input must already be sorted. */
 export function groupTalksByYear(talks: Talk[]) {
   const groups = new Map<number, Talk[]>();

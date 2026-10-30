@@ -1,6 +1,6 @@
 ---
 title: "Deploy Next.js and Angular apps with Firebase App Hosting on Google Cloud"
-event: "Google Cloud Next '25"
+event: "Google Cloud Next 2025"
 date: 2025-04-11
 location: "Las Vegas, NV"
 with: [julia-reid]

@@ -1,7 +1,7 @@
 ---
 import Base from "../../layouts/Base.astro";
 import Presenters from "../../components/Presenters.astro";
-import { getTalks, groupTalksByYear, talkHref, hasWriteup, formatTalkDate, isoDate } from "../../lib/content";
+import { getTalks, groupTalksByYear, talkHref, talkEvent, hasWriteup, formatTalkDate, isoDate } from "../../lib/content";
 
 const talks = await getTalks();
 const years = groupTalksByYear(talks);
@@ -22,12 +22,15 @@ const years = groupTalksByYear(talks);
                 <li>
                   <time datetime={isoDate(talk.data.date)}>{formatTalkDate(talk)}</time>
                   <div class="entry">
-                    {href ? <a href={href}>{talk.data.title}</a> : <span class="title">{talk.data.title}</span>}
-                    <span class="meta">
-                      {talk.data.event}
-                      {talk.data.location && <> · {talk.data.location}</>}
-                      <Presenters people={talk.data.with} />
-                    </span>
+                    {href ? <a href={href}>{talkEvent(talk)}</a> : <span class="title">{talkEvent(talk)}</span>}
+                    <span class="session">{talk.data.title}</span>
+                    {(talk.data.location || talk.data.with.length > 0) && (
+                      <span class="meta">
+                        {talk.data.location}
+                        {talk.data.location && talk.data.with.length > 0 && " · "}
+                        <Presenters people={talk.data.with} />
+                      </span>
+                    )}
                     {talk.data.summary && <span class="meta">{talk.data.summary}</span>}
                     <span class="links">
                       {hasWriteup(talk) && <a href={`/talks/${talk.id}`}>notes</a>}
@@ -85,11 +88,22 @@ const years = groupTalksByYear(talks);
     font-size: 17px;
   }
 
+  .session {
+    color: var(--fg);
+  }
+
   .links {
     display: flex;
     flex-wrap: wrap;
     gap: 16px;
     margin-top: 4px;
     font-size: 13px;
+  }
+
+  /* Beat the listing's title-link style, which would otherwise apply here too. */
+  .entry .links a {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--accent);
   }
 </style>
