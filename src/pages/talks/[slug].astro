@@ -1,6 +1,7 @@
 ---
 import { render } from "astro:content";
 import Base from "../../layouts/Base.astro";
+import Presenters from "../../components/Presenters.astro";
 import { getAllTalks, hasWriteup, talkEvent, formatTalkDate, isoDate } from "../../lib/content";
 
 export async function getStaticPaths() {
@@ -31,7 +32,7 @@ const description = summary ?? `${title}, a talk at ${heading}.`;
       <p class="meta">
         {location && <>{location} · </>}
         <time datetime={isoDate(talk.data.date)}>{formatTalkDate(talk)}</time>
-        {talk.data.with.length > 0 && <> · with {talk.data.with.join(", ")}</>}
+        {talk.data.with.length > 0 && <> · <Presenters people={talk.data.with} /></>}
       </p>
       {(video || slides || url) && (
         <ul class="chips" aria-label="Links">

@@ -1,0 +1,26 @@
+# Co-presenters, keyed by the ID that talks list under `with:`.
+# `url` is optional: point it at whatever page best represents the person
+# (blog, personal site, GitHub, LinkedIn). Without one the name is plain text.
+
+abe-haskins:
+  name: Abe Haskins
+brendan-lim:
+  name: Brendan Lim
+charity-majors:
+  name: Charity Majors
+frank-van-puffelen:
+  name: Frank van Puffelen
+julia-reid:
+  name: Julia Reid
+katherine-fang:
+  name: Katherine Fang
+lauren-long:
+  name: Lauren Long
+mark-thompson:
+  name: Mark Thompson
+michael-bleigh:
+  name: Michael Bleigh
+robert-jan-huijsman:
+  name: Robert-Jan Huijsman
+sarah-allen:
+  name: Sarah Allen

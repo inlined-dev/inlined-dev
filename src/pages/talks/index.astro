@@ -1,5 +1,6 @@
 ---
 import Base from "../../layouts/Base.astro";
+import Presenters from "../../components/Presenters.astro";
 import { getTalks, groupTalksByYear, talkHref, talkEvent, hasWriteup, formatTalkDate, isoDate } from "../../lib/content";
 
 const talks = await getTalks();
@@ -27,7 +28,7 @@ const years = groupTalksByYear(talks);
                       <span class="meta">
                         {talk.data.location}
                         {talk.data.location && talk.data.with.length > 0 && " · "}
-                        {talk.data.with.length > 0 && <>with {talk.data.with.join(", ")}</>}
+                        <Presenters people={talk.data.with} />
                       </span>
                     )}
                     {talk.data.summary && <span class="meta">{talk.data.summary}</span>}

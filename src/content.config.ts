@@ -1,5 +1,5 @@
-import { defineCollection, z } from "astro:content";
-import { glob } from "astro/loaders";
+import { defineCollection, reference, z } from "astro:content";
+import { file, glob } from "astro/loaders";
 
 /**
  * Blog posts live in `src/content/blog/`, either as `<slug>.md` or as a
@@ -35,6 +35,18 @@ const portfolio = defineCollection({
 });
 
 /**
+ * Co-presenters live in one file, `src/content/people.yaml`, keyed by ID.
+ * Talks name them by that ID under `with:`; `url` makes the name a link.
+ */
+const people = defineCollection({
+  loader: file("./src/content/people.yaml"),
+  schema: z.object({
+    name: z.string(),
+    url: z.string().url().optional(),
+  }),
+});
+
+/**
  * Talks: one file per talk. `date` sorts the list; set `when` to override how
  * the date is shown when only the month or year is known ("Nov 2013").
  * A talk with body text below the front matter gets its own page; one without
@@ -48,7 +60,7 @@ const talks = defineCollection({
     date: z.coerce.date(),
     when: z.string().optional(),
     location: z.string().optional(),
-    with: z.array(z.string()).default([]),
+    with: z.array(reference("people")).default([]),
     video: z.string().url().optional(),
     slides: z.string().url().optional(),
     url: z.string().url().optional(),
@@ -57,4 +69,4 @@ const talks = defineCollection({
   }),
 });
 
-export const collections = { blog, portfolio, talks };
+export const collections = { blog, portfolio, people, talks };
