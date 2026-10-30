@@ -36,13 +36,14 @@ const portfolio = defineCollection({
 
 /**
  * Co-presenters live in one file, `src/content/people.yaml`, keyed by ID.
- * Talks name them by that ID under `with:`; `url` makes the name a link.
+ * Talks name them by that ID under `with:`. Each person gets an entry on
+ * /speakers listing their `links` and every talk they gave with Thomas.
  */
 const people = defineCollection({
   loader: file("./src/content/people.yaml"),
   schema: z.object({
     name: z.string(),
-    url: z.string().url().optional(),
+    links: z.array(z.object({ label: z.string(), url: z.string().url() })).default([]),
   }),
 });
 
