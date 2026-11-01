@@ -1,6 +1,9 @@
 # Co-presenters, keyed by the ID that talks list under `with:`.
-# `url` is optional: point it at whatever page best represents the person
-# (blog, personal site, GitHub, LinkedIn). Without one the name is plain text.
+# Each person gets an entry on /speakers with their talks. `links` is optional
+# and takes as many as you like, e.g.
+#   links:
+#     - { label: blog, url: "https://..." }
+#     - { label: GitHub, url: "https://github.com/..." }
 
 abe-haskins:
   name: Abe Haskins

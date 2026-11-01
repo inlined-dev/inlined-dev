@@ -58,6 +58,18 @@ export function talkEvent(talk: Talk) {
   return /\b(19|20)\d{2}\b/.test(event) ? event : `${event} ${date.getUTCFullYear()}`;
 }
 
+/** Each co-presenter with their listed talks, most talks first, then by name. */
+export async function getSpeakers() {
+  const [people, talks] = await Promise.all([getCollection("people"), getTalks()]);
+  return people
+    .map((person) => ({
+      person,
+      talks: talks.filter((talk) => talk.data.with.some((ref) => ref.id === person.id)),
+    }))
+    .filter(({ talks }) => talks.length > 0)
+    .sort((a, b) => b.talks.length - a.talks.length || a.person.data.name.localeCompare(b.person.data.name));
+}
+
 /** Talks grouped by year, newest year first; input must already be sorted. */
 export function groupTalksByYear(talks: Talk[]) {
   const groups = new Map<number, Talk[]>();

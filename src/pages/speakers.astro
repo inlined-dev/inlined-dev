@@ -1,0 +1,100 @@
+---
+import Base from "../layouts/Base.astro";
+import { getSpeakers, talkHref, talkEvent, formatTalkDate, isoDate } from "../lib/content";
+
+const speakers = await getSpeakers();
+---
+
+<Base title="Co-presenters" description="People Thomas Bouldin has given talks with.">
+  <div class="index">
+    <p class="prompt">ls speakers/</p>
+    <h1>Co-presenters</h1>
+    {speakers.length > 0 ? (
+      speakers.map(({ person, talks }) => (
+        <section class="person" id={person.id} aria-labelledby={`${person.id}-name`}>
+          <h2 id={`${person.id}-name`}>{person.data.name}</h2>
+          {person.data.links.length > 0 && (
+            <span class="links">
+              {person.data.links.map((link) => <a href={link.url}>{link.label} ↗</a>)}
+            </span>
+          )}
+          <ul class="listing">
+            {talks.map((talk) => {
+              const href = talkHref(talk);
+              return (
+                <li>
+                  <time datetime={isoDate(talk.data.date)}>{formatTalkDate(talk)}</time>
+                  <div class="entry">
+                    {href ? <a href={href}>{talkEvent(talk)}</a> : <span class="title">{talkEvent(talk)}</span>}
+                    <span class="session">{talk.data.title}</span>
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
+        </section>
+      ))
+    ) : (
+      <p class="empty">speakers/: nothing here yet</p>
+    )}
+    <p class="back"><a href="/talks">cd ../talks</a></p>
+  </div>
+</Base>
+
+<style>
+  .index {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  h1 {
+    margin: 0;
+    font-size: 36px;
+  }
+
+  .person {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 16px;
+    scroll-margin-top: 80px;
+  }
+
+  .person h2 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--fg-strong);
+  }
+
+  .person h2::before {
+    content: "# ";
+    color: var(--prompt);
+  }
+
+  .person:target h2 {
+    color: var(--accent);
+  }
+
+  .title {
+    color: var(--fg-strong);
+    font-weight: 500;
+    font-size: 17px;
+  }
+
+  .session {
+    color: var(--fg);
+  }
+
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    font-size: 13px;
+  }
+
+  .back {
+    margin: 24px 0 0;
+  }
+</style>
