@@ -1,7 +1,7 @@
 ---
 title: "Running at Scale on Parse"
 event: "Facebook F8"
-date: 2015-05-25"
+date: 2015-03-26
 location: "San Francisco, CA"
 with: [charity-majors]
 video: "https://www.youtube.com/watch?v=3wFQiQXQbto"
