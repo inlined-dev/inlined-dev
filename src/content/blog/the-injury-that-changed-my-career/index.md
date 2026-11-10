@@ -18,17 +18,19 @@ In 2012 I was one of the first engineers at Parse, working on the iOS SDK. Devel
 
 The error coming back was an *out-of-memory* error, which made no sense. The devices weren't out of memory.
 
-It took me a long time to find the cause. The phone's 3G modem drained data far more slowly than an app could hand it over, so the kernel's send buffer filled up. When that happens, a write to a socket can accept only part of what you gave it. Asked to write *n* bytes, it writes fewer and tells you how many, and you're supposed to wait and send the rest. Apple's networking library didn't handle that. If a write returned anything other than *n*, it gave up and reported the short write as running out of memory.
+The first real clue was a strange asymmetry. Apple's networking library could upload in two ways: from a buffer in memory, or by streaming from a file on disk. The buffer version failed on cellular. The file version didn't. That should have been the end of it, since we could just switch to the file version, except the file version didn't let us set headers we needed. So we were stuck with the version that failed, and the question became what the file path was doing that the buffer path wasn't.
+
+It took me a long time to answer that. The phone's 3G modem drained data far more slowly than an app could hand it over, so the kernel's send buffer filled up. When that happens, a write to a socket can accept only part of what you gave it. Asked to write *n* bytes, it writes fewer and tells you how many, and you're supposed to wait and send the rest. The buffer path in Apple's library didn't handle that. If a write returned anything other than *n*, it gave up and reported the short write as running out of memory. The file path handled it, which is why it survived.
 
 That explained the pattern. Every chunk of an upload was a small chance of a short write, and a file is many chunks, so the odds of getting through without one fell exponentially with file size. Wi-Fi drained the buffer fast enough that it almost never filled. Cellular filled it constantly.
 
 ## The fix
 
-I couldn't change Apple's library, so I replaced it. I wrote our own HTTP client on top of raw sockets, and its whole reason to exist was to do the boring, correct thing: when the kernel takes part of a write, back off, wait until the socket can take more, and continue from where it left off.
+I couldn't change Apple's library, and I couldn't use the part of it that worked, so I replaced it. I wrote our own HTTP client on top of raw sockets, and its whole reason to exist was to do the boring, correct thing: when the kernel takes part of a write, back off, wait until the socket can take more, and continue from where it left off.
 
 While I was in there I added streaming. Memory limits on iPhones were harsh then, and loading a whole file into RAM to upload it was a good way to get your app killed. The new client read files from disk as it sent them, so uploading a large file cost about as much memory as uploading a small one. [Optional: a sentence or two on the mmap-backed NSData trick, if you want to go deeper.]
 
-It worked. Large uploads on cellular stopped failing. As far as I knew, only two or three apps had worked around this bug, and Parse was the first platform to fix it for every app built on it. We shipped it to all of our developers and [wrote about streaming files on the Parse blog](#). [Replace `#` with the archived Parse blog link.] About a month later, after I walked the maintainer of AFNetworking through the problem, it shipped the same fix, and the rest of the iOS world got it too.
+It worked. Large uploads on cellular stopped failing. As far as I knew, only two or three apps had worked around this bug, and Parse was the first platform to fix it for every app built on it. We shipped it to all of our developers and [wrote about streaming files on the Parse blog](#). [Replace `#` with the archived Parse blog link.] About a month later, after I walked the maintainer of AFNetworking through the problem, it shipped a fix of its own, and a clever one: write the whole request, headers and body together, to a temporary file, so the OS would treat it as an ordinary file upload and take the path that worked. It was a different approach with the same result, and it got the fix to the rest of the iOS world.
 
 ## The doorknob
 
@@ -52,7 +54,7 @@ Some of it was. The thing that broke in 2012 was my hands, and AI has changed wh
 
 But the more I think about it, the more I believe the lesson was never really about typing.
 
-**The hard part was the diagnosis.** Writing the HTTP client took weeks, but the breakthrough was noticing that an out-of-memory error on a device with plenty of memory meant the error was lying, and figuring out what it was lying about. AI makes the building cheaper. It doesn't make that kind of judgment any less valuable. If anything, it means more of my day is that kind of judgment.
+**The hard part was the diagnosis.** Writing the HTTP client took weeks, but the breakthrough was noticing that an out-of-memory error on a device with plenty of memory meant the error was lying, and that the one upload path that survived was the thread to pull to find out what it was lying about. AI makes the building cheaper. It doesn't make that kind of judgment any less valuable. If anything, it means more of my day is that kind of judgment.
 
 **The impact came from other people.** The fix mattered because Parse put it in thousands of apps, and then it mattered more because I gave it to AFNetworking and it reached the rest of the iOS ecosystem. My hands built it. Other people made it count. That's still true. A game for a community's inside jokes is only worth anything if a community plays it.
 
