@@ -164,9 +164,15 @@ const contacts = [
   }
 
   .resume-doc :global(.entry-head .role) {
-    margin-left: 0.6em;
+    margin-left: 0;
     font-weight: 400;
     color: var(--fg-soft);
+  }
+
+  /* Visible separator between organization and role (the markdown's " · "). */
+  .resume-doc :global(.entry-head .role::before) {
+    content: "·";
+    margin: 0 0.5em;
   }
 
   .resume-doc :global(.entry-head .dates) {
@@ -337,7 +343,7 @@ const contacts = [
     }
 
     .resume-doc :global(.entry-head .role) {
-      margin-left: 6pt;
+      margin-left: 0;
       font-weight: 400;
       color: var(--dim);
     }
