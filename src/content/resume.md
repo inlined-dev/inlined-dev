@@ -75,7 +75,7 @@ Coordinated with Ops teams to improve reliability, observability, and performanc
 #### Pre-acquisition · Software Engineer · 2012–2013
 Seventh non-founder hire across infrastructure, the iOS and Android SDKs, and push
 
-Worked around early mobile limits: an mmap-backed NSData to dodge iOS RAM caps, a replacement for iOS's HTTP stack, which failed on large cellular uploads, and a push network for Android devices without Google accounts
+Address early mobile issues like memory limits, faulty network stacks, and Google ID coupling to Android push
 
 Implemented novel features such as [native subclassing](https://web.archive.org/web/20130328051110/http://blog.parse.com/2013/03/22/stay-classy-objective-c-introducing-native-subclasses-for-parse-objects/) and [recipient-local scheduled push notifications](https://web.archive.org/web/20150320055432/http://blog.parse.com/2012/11/14/local-push-because-its-5-oclock-somewhere)
 
@@ -91,10 +91,12 @@ Invented a novel application virtualization and streaming architecture, earning 
 
 **Scuba**: PADI IDC Staff Instructor (inactive), issued 100+ certifications, planning failure modes where errors are fatal
 
-## Stack
-**Current**: TypeScript, Go, Google Cloud Platform, Cloud Run, Firebase, App Hosting, Firestore, observability
+## Technical Skills
+**Languages**: TypeScript, Go (Prior: Python, C++, Java, C#, Ruby, Objective-C)
 
-**Earlier depth**: C++, Java, Ruby, Python, distributed systems, IAM and threat modeling, privacy compliance
+**Infra & Platforms**: Node.js, Next.js, Cloud Run, Cloud Functions, App Engine, Envoy, Spanner, Kubernetes, Knative, Containers, MongoDB, Cloud Build
+
+**Domains**: Distributed Systems, API/SDK & CLI Design, IAM & Security, Privacy & Data Sovereignty, Abuse Mitigation, Distributed Tracing & Observability, Fleet Efficiency
 
 ## Education
 B.S. Software Engineering, California Polytechnic State University, San Luis Obispo
