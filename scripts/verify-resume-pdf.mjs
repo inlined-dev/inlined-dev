@@ -38,9 +38,9 @@ for (const [role, dates] of [
 ]) check(layout.split("\n").some((l) => l.includes(role) && l.includes(dates)), `"${role}" with ${dates} on one line`);
 check(!/\d{4} - /.test(raw) && !/\d{4} present/.test(raw), "no hyphen/space date ranges");
 
-for (const term of ["AI-first", "TL/M", "[7]", "Next.js builds", "TypeScript", "Go", "Kubernetes", "Irvine, CA"])
+for (const term of ["AI-first", "TL/M", "[7]", "Next.js build adapter", "TypeScript", "Go", "Kubernetes", "GCP", "Terraform", "multi-tenant"])
   check(raw.includes(term), `contains ${term}`);
 check(!raw.includes("Al-first") && !raw.includes("(7)"), "no Al-first / (7) corruption");
-for (let n = 1; n <= 11; n++) check(raw.includes(`[${n}]`), `footnote [${n}]`);
+for (let n = 1; n <= 9; n++) check(raw.includes(`[${n}]`), `footnote [${n}]`);
 
 process.exit(failures.length ? 1 : 0);

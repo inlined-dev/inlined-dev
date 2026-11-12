@@ -1,7 +1,6 @@
 ---
 candidate: Thomas Bouldin
-summary: Senior Staff engineer and tech lead for serverless and developer platforms
-location: Irvine, CA
+summary: Senior Staff engineer and tech lead for serverless infrastructure and developer platforms
 email: thomas.bouldin@gmail.com
 website: https://inlined.dev
 github: https://github.com/inlined
@@ -9,36 +8,32 @@ linkedin: https://www.linkedin.com/in/thomasbouldin/
 
 ---
 
-## Talks [(full list at inlined.dev/talks)](https://inlined.dev/talks)
-Parse Developer Day · F8 · Google I/O (6x) · Google Cloud Next (2x) · Firebase Dev Summit (2x) · O'Reilly Fluent
-
 ## Experience
 
 ### Google
 #### Firebase · Senior Staff Software Engineer, Platform Tech Lead (L7) · 2025–present
 Shaping platform-wide strategy across organizations and specialties
-  - Led urgent capacity conservation: redesigned 2 products I lead; triaged trade-offs with 8 partner teams
+  - Led urgent capacity conservation: redesigned 2 products I lead; triaged trade-offs across 8 partner integrations
   - Coordinated abuse mitigation strategies with platform leaders, legal, privacy, and government agencies
-  - Drove plan to safely migrate Firebase Functions customers to Cloud Run functions with no code changes
   - Using a production-grade, AI-first side project to surface the day-2 friction developers hit after the demo
 
 Led Function Kits: ordinary Functions replace the Extensions CLI and service, turning a shutdown into an upgrade
-  - Pitched it after earlier attempts stalled, set strategy with senior leadership against a deadline, then handed off
+  - Pitched it after earlier attempts stalled, set strategy with senior leadership against a deadline
   - Audited Extensions-only gaps and led the fixes, building declarative IAM role bindings and API dependencies
   - Shipped migration tooling and an agent skill that port any extension, even abandoned ones, to Functions v2
 
 Embedded with Genkit for its 1.0 launch, now at nearly 1M monthly [npm downloads](https://api.npmjs.org/downloads/point/2026-10-12:2026-11-10/genkit)
-  - Redesigned HTTP binding contract so exposing Genkit in any web framework takes one line
-  - Fully decoupled Functions from Genkit, built Next.js with SSE, and added auth middleware
+  - Redesigned the HTTP binding and wrote auth middleware so any web framework exposes Genkit in one line
+  - Moved the Genkit binding into the Functions SDK via duck typing: no dependency, guarded by a compile test
   - Designed IAM changes and drove security approval for zero-config Genkit telemetry on App Hosting
 
 #### Firebase · Tech Lead & Software Engineering Manager (L6) · 2021–2025
 Led 16 SWEs, 2 agencies, and XFN to keep three products excellent while launching App Hosting [at I/O 2024](https://www.youtube.com/watch?v=qyhdKb8liEA)
   - Standardized dual assignment of legacy and greenfield products, keeping headcount fluid and visibility shared
-  - Every quarterly anonymous survey on psychological safety, belonging, and purpose was 90-100% positive
+  - Started a quarterly anonymous survey when Google cut its own; safety, belonging, purpose always 90-100%
   - Evolved from TL to TL/M to EM, from initial architecture to a multi-level org, mentorship, and staffing
   - Set the App Hosting roadmap with product, UX, and partner orgs, with cut lines to protect the MVP
-  - Adapter downloads suggest [1.7M monthly Next.js builds](https://api.npmjs.org/downloads/point/2026-10-12:2026-11-10/@apphosting/adapter-nextjs)
+  - App Hosting's Next.js build adapter gets [1.7M npm downloads a month](https://api.npmjs.org/downloads/point/2026-10-12:2026-11-10/@apphosting/adapter-nextjs), about one per customer build
 
 Tech lead of Firebase Functions (15M monthly [npm downloads](https://api.npmjs.org/downloads/point/2026-10-12:2026-11-10/firebase-functions)) from V2 planning to release, then handoff
   - Triaged gaps for date-driven V2 launch without parity, shipping stopgaps and features for understaffed partners
@@ -50,35 +45,30 @@ Co-created the [CloudEvents standard](https://cloudevents.io) with serverless.co
 
 Contributed to [Knative](https://knative.dev/) primitives and eventing, demoing Pub/Sub transport and Kubernetes event sources
 
-Helped cut fleet cost of the shared container host behind App Engine, Functions v1, and Cloud Run
-  - Removed its main-thread model, reworked locks with short critical sections, immutable data, and atomics
-  - Moved sidecar metrics to shared Envoy and host, unblocking its removal; fleet-wide shadow verification
-  - Rebuilt metrics pipeline as an event-to-metric library, fixing why Cloud Trace never worked on Functions/Run
-
-Designed and shipped Google's original event subscription platform, succeeded by Eventarc
+Helped cut fleet cost of the multi-tenant container host behind App Engine, Functions v1, and Cloud Run
+  - Removed its main-thread model, reshaping APIs for optimal locking with immutable data and atomics
+  - Rebuilt metrics off single-tenant sidecars to unblock their removal and added Cloud Trace for Functions and Run
 
 #### Firebase · Senior Software Engineer (L5) · 2015–2017
 Proposed and led Firebase Functions as tech lead, interviewing and recommending its hires
-  - Delivered every planned integration across four orgs on schedule, for the [Cloud Next 2017](https://www.youtube.com/watch?v=GNR9El3XWYo) launch
-  - Built the Realtime Database event pipeline and evolved it into a common platform launched with four sources
+  - Grew the Realtime Database event pipeline into Google's first event platform, later succeeded by Eventarc
+  - Standardized its API and onboarded every event provider for the [Cloud Next 2017](https://www.youtube.com/watch?v=GNR9El3XWYo) launch, pairing on-site
 
 Improved Realtime Database reliability
   - Built MongoDB observability dashboards and trained the team on its performance
   - Migrated the fleet with zero downtime under LTS pressure, proving an N² regression to MongoDB from source
 
 ### Parse
-#### After Facebook acquisition · Senior Software Engineer (L5) · 2013–2015
-Led the patent-winning push notifications team, serving over a billion app installs daily
-  - Rewrote the Android push network and queues in Go for 100x throughput and higher reliability
+#### Facebook (post-acquisition) · Senior Software Engineer (L5) · 2013–2015
+Led the patent-winning push team, rewriting push in Go for 100x throughput at over a billion app installs daily
 
-Coordinated with Ops teams to improve reliability, observability, and performance, especially in the data layer
+Hardened performance and reliability with Ops: push, databases, caching, API servers, multi-tenant compute
 
-#### Pre-acquisition · Software Engineer · 2012–2013
-Seventh non-founder hire across infrastructure, the iOS and Android SDKs, and push
-
-Address early mobile issues like memory limits, faulty network stacks, and Google ID coupling to Android push
-
-Implemented novel features such as [native subclassing](https://web.archive.org/web/20130328051110/http://blog.parse.com/2013/03/22/stay-classy-objective-c-introducing-native-subclasses-for-parse-objects/) and [recipient-local scheduled push notifications](https://web.archive.org/web/20150320055432/http://blog.parse.com/2012/11/14/local-push-because-its-5-oclock-somewhere)
+#### Startup (pre-acquisition) · Software Engineer · 2012–2013
+Seventh non-founder hire, building across infrastructure, the iOS and Android SDKs, and push
+  - Kept blob data outside iOS's strict RAM limits
+  - Replaced the iOS HTTP library to circumvent a bug that caused uploads on cellular to fail
+  - Brought push to Android devices without the Play Store, including Kindle and phones in China
 
 ### Google · Software Engineer III (L4) · 2010–2012
 Helped scale Image Search indexing by replacing fixed-shard indexing with dynamic indexing on [Percolator](https://tikv.org/deep-dive/distributed-transaction/percolator/)
@@ -86,18 +76,20 @@ Helped scale Image Search indexing by replacing fixed-shard indexing with dynami
 ### Microsoft · Software Development Engineer II · 2007–2010
 Invented a novel application virtualization and streaming architecture, earning four patents
 
-## Beyond 9-5
-**Memelord**: a second-screen party game for communities' inside jokes, built with an AI-first solo SDLC
-  - Multi-stage AI pipeline for iterative creative writing assistance, addressing safety, novelty, and diversity
-
-**Scuba**: PADI IDC Staff Instructor (inactive), issued 100+ certifications, planning failure modes where errors are fatal
-
 ## Technical Skills
 **Languages**: TypeScript, Go (Prior: Python, C++, Java, C#, Ruby, Objective-C)
 
-**Infra & Platforms**: Node.js, Next.js, Cloud Run, Cloud Functions, App Engine, Envoy, Spanner, Kubernetes, Knative, Containers, MongoDB, Cloud Build
+**Infra & Platforms**: Firebase (App Hosting, Functions, Hosting, Storage, Realtime Database), GCP (Cloud Run, Cloud Functions, Cloud Build, Eventarc, Secret Manager, Firestore), Spanner, Terraform, Next.js
 
-**Domains**: Distributed Systems, API/SDK & CLI Design, IAM & Security, Privacy & Data Sovereignty, Abuse Mitigation, Distributed Tracing & Observability, Fleet Efficiency
+**Domains**: Distributed Systems, Serverless Platforms, Multi-tenancy, API/SDK & CLI Design, IAM & Security, Privacy & Data Sovereignty, Abuse Mitigation, Incident Response, Observability, Capacity & Fleet Efficiency
+
+## Talks [(full list at inlined.dev/talks)](https://inlined.dev/talks)
+Parse Developer Day · F8 · Google I/O (6x) · Google Cloud Next (2x) · Firebase Dev Summit (2x) · O'Reilly Fluent
+
+## Beyond 9-5
+**Memelord**: an AI-augmented party game for communities' inside jokes, built with an AI-first solo SDLC
+
+**Scuba**: PADI IDC Staff Instructor (inactive), issued 100+ certifications, planning failure modes where errors are fatal
 
 ## Education
 B.S. Software Engineering, California Polytechnic State University, San Luis Obispo

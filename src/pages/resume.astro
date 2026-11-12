@@ -31,7 +31,7 @@ const contacts = [
 ].filter(Boolean) as { label: string; href?: string }[];
 ---
 
-<Base title="Resume" description={`Resume of ${candidate}. ${summary ?? ""}`.trim()}>
+<Base title={`${candidate} · Resume`} description={`Resume of ${candidate}. ${summary ?? ""}`.trim()}>
   <div class="resume">
     <div class="actions no-print">
       <p class="prompt">cat resume.md</p>
@@ -378,6 +378,11 @@ const contacts = [
     .resume-doc :global(h3 + p),
     .resume-doc :global(h4 + p) {
       margin-top: 2pt;
+    }
+
+    /* Don't strand a lead-in line at the foot of a page, away from its sub-points. */
+    .resume-doc :global(p:has(+ ul)) {
+      break-after: avoid;
     }
 
     /* Footnote markers and the "Links" list, pinned to the bottom of the last page. */
