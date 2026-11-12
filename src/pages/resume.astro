@@ -21,13 +21,14 @@ const body = rendered.replace(/<a href="([^"]+)"([^>]*)>(.*?)<\/a>/g, (whole, hr
   return `${whole}<sup class="fn">[${n}]</sup>`;
 });
 
-const { candidate, summary, email, website, github, linkedin } = frontmatter;
+const { candidate, summary, location, email, website, github, linkedin } = frontmatter;
 const contacts = [
+  location && { label: location },
   website && { label: display(website), href: website },
   email && { label: email, href: `mailto:${email}` },
   github && { label: display(github), href: github },
   linkedin && { label: display(linkedin), href: linkedin },
-].filter(Boolean) as { label: string; href: string }[];
+].filter(Boolean) as { label: string; href?: string }[];
 ---
 
 <Base title="Resume" description={`Resume of ${candidate}. ${summary ?? ""}`.trim()}>
@@ -46,7 +47,7 @@ const contacts = [
           {summary && <p class="headline">{summary}</p>}
         </div>
         <ul class="contact" aria-label="Contact">
-          {contacts.map((c) => <li><a href={c.href}>{c.label}</a></li>)}
+          {contacts.map((c) => <li>{c.href ? <a href={c.href}>{c.label}</a> : c.label}</li>)}
         </ul>
       </header>
       <div class="resume-main"><Fragment set:html={body} /></div>
@@ -226,7 +227,9 @@ const contacts = [
       font-size: 9.6pt;
       line-height: 1.42;
       color: var(--ink);
-      font-feature-settings: "tnum" 1, "cv11" 1;
+      font-feature-settings: "tnum" 1, "cv11" 1, "liga" 0, "clig" 0, "calt" 0;
+      font-variant-ligatures: none;
+      text-rendering: optimizeSpeed;
     }
 
     .resume-doc :global(a) {
@@ -286,6 +289,7 @@ const contacts = [
       font-size: 8.4pt;
       font-weight: 650;
       letter-spacing: 0.14em;
+      font-kerning: none;
       text-transform: uppercase;
       color: var(--accent);
       break-after: avoid;
@@ -382,7 +386,7 @@ const contacts = [
       margin-left: 1pt;
       font-size: 6.5pt;
       line-height: 0;
-      vertical-align: super;
+      vertical-align: baseline;
       color: var(--accent);
     }
 
