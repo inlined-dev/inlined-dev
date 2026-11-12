@@ -1,0 +1,10 @@
+{
+  "io24": "https://www.youtube.com/watch?v=qyhdKb8liEA",
+  "forrester": "https://cloud.google.com/blog/products/serverless/leading-in-2023-forrester-functions-as-a-service-wave/",
+  "subclassing": "https://web.archive.org/web/20130328051110/http://blog.parse.com/2013/03/22/stay-classy-objective-c-introducing-native-subclasses-for-parse-objects/",
+  "local-push": "https://web.archive.org/web/20150320055432/http://blog.parse.com/2012/11/14/local-push-because-its-5-oclock-somewhere",
+  "percolator": "https://tikv.org/deep-dive/distributed-transaction/percolator/",
+  "npm-genkit": "https://api.npmjs.org/downloads/point/2026-10-12:2026-11-10/genkit",
+  "npm-functions": "https://api.npmjs.org/downloads/point/2026-10-12:2026-11-10/firebase-functions",
+  "npm-apphosting": "https://api.npmjs.org/downloads/point/2026-10-12:2026-11-10/@apphosting/adapter-nextjs"
+}

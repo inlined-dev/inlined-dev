@@ -3,12 +3,25 @@ import Base from "../layouts/Base.astro";
 import { experimental_AstroContainer as AstroContainer } from "astro/container";
 import { Content as Resume, frontmatter } from "../content/resume.md";
 import { splitResumeHeadings } from "../lib/resume-headings";
+import shortLinks from "../data/short-links.json";
 
 const container = await AstroContainer.create();
-const body = splitResumeHeadings(await container.renderToString(Resume));
+const rendered = splitResumeHeadings(await container.renderToString(Resume));
+
+// Print footnotes: number each link in the body and list its (short) address at the bottom.
+const display = (url: string) => url.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "");
+const shortFor = new Map(Object.entries(shortLinks).map(([slug, url]) => [url, `inlined.dev/r/${slug}`]));
+const notes: { href: string; label: string }[] = [];
+const body = rendered.replace(/<a href="([^"]+)"([^>]*)>(.*?)<\/a>/g, (whole, href: string, rest: string, text: string) => {
+  const url = href.replace(/&amp;/g, "&");
+  // A link whose own text already shows the address needs no footnote.
+  if (text.includes(display(url))) return whole;
+  let n = notes.findIndex((note) => note.href === url) + 1;
+  if (!n) n = notes.push({ href: url, label: shortFor.get(url) ?? display(url) });
+  return `${whole}<sup class="fn">[${n}]</sup>`;
+});
 
 const { candidate, summary, email, website, github, linkedin } = frontmatter;
-const display = (url: string) => url.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "");
 const contacts = [
   website && { label: display(website), href: website },
   email && { label: email, href: `mailto:${email}` },
@@ -36,12 +49,50 @@ const contacts = [
           {contacts.map((c) => <li><a href={c.href}>{c.label}</a></li>)}
         </ul>
       </header>
-      <Fragment set:html={body} />
+      <div class="resume-main"><Fragment set:html={body} /></div>
+      {notes.length > 0 && (
+        <footer class="footnotes">
+          <h2>Links</h2>
+          <ol>
+            {notes.map((note) => <li><span class="num">{notes.indexOf(note) + 1}</span>{note.label}</li>)}
+          </ol>
+        </footer>
+      )}
     </article>
   </div>
 </Base>
 
 <style>
+  /* Static (non-variable) instances for the PDF: Chromium embeds variable fonts as Type 3,
+     which some resume parsers and PDF viewers handle badly. */
+  @font-face {
+    font-family: "Inter Print";
+    font-style: normal;
+    font-weight: 400;
+    src: url("/fonts/Inter-static-400.woff2") format("woff2");
+  }
+
+  @font-face {
+    font-family: "Inter Print";
+    font-style: normal;
+    font-weight: 500;
+    src: url("/fonts/Inter-static-500.woff2") format("woff2");
+  }
+
+  @font-face {
+    font-family: "Inter Print";
+    font-style: normal;
+    font-weight: 600;
+    src: url("/fonts/Inter-static-600.woff2") format("woff2");
+  }
+
+  @font-face {
+    font-family: "Inter Print";
+    font-style: normal;
+    font-weight: 650;
+    src: url("/fonts/Inter-static-650.woff2") format("woff2");
+  }
+
   .resume {
     display: flex;
     flex-direction: column;
@@ -141,6 +192,11 @@ const contacts = [
     color: var(--accent-hover);
   }
 
+  .footnotes,
+  .resume-doc :global(sup.fn) {
+    display: none;
+  }
+
   /* ---------- Print: two-page resume layout ---------- */
 
   @media print {
@@ -160,7 +216,7 @@ const contacts = [
       --rule: #d9dce1;
       --accent: #1f4e8c;
       max-width: none;
-      font-family: Inter, "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-family: "Inter Print", "Helvetica Neue", Helvetica, Arial, sans-serif;
       font-size: 9.6pt;
       line-height: 1.42;
       color: var(--ink);
@@ -190,7 +246,7 @@ const contacts = [
     .resume-head h1 {
       font-size: 23pt;
       font-weight: 650;
-      letter-spacing: -0.02em;
+      letter-spacing: 0;
       line-height: 1.05;
       color: var(--ink);
     }
@@ -302,9 +358,68 @@ const contacts = [
       color: var(--dim);
     }
 
+    /* Top-level resume items are plain paragraphs; sub-points are a list beneath. */
     .resume-doc :global(p) {
+      margin: 4pt 0 0;
+      color: var(--ink);
+    }
+
+    .resume-doc :global(h2 + p),
+    .resume-doc :global(h3 + p),
+    .resume-doc :global(h4 + p) {
+      margin-top: 2pt;
+    }
+
+    /* Footnote markers and the "Links" list, pinned to the bottom of the last page. */
+    .resume-doc :global(sup.fn) {
+      display: inline;
+      margin-left: 1pt;
+      font-size: 6.5pt;
+      line-height: 0;
+      vertical-align: super;
+      color: var(--accent);
+    }
+
+    .resume-doc {
+      display: flex;
+      flex-direction: column;
+      /* Just under two Letter pages of content area, so the footer sits at the foot of page 2. */
+      min-height: 19.3in;
+    }
+
+    .footnotes {
+      display: block;
+      margin-top: auto;
+      padding-top: 6pt;
+      border-top: 0.5pt solid var(--rule);
+      break-inside: avoid;
+    }
+
+    .footnotes :global(h2),
+    .resume-doc .footnotes h2 {
+      margin: 0 0 3pt;
+    }
+
+    .footnotes ol {
+      list-style: none;
       margin: 0;
+      padding: 0;
+      columns: 2;
+      column-gap: 24pt;
+      font-size: 8.2pt;
+      line-height: 1.5;
       color: var(--soft);
+    }
+
+    .footnotes li {
+      break-inside: avoid;
+    }
+
+    .footnotes .num {
+      display: inline-block;
+      width: 12pt;
+      color: var(--accent);
+      font-weight: 600;
     }
 
     .resume-doc :global(strong) {
@@ -314,45 +429,24 @@ const contacts = [
 
     .resume-doc :global(ul:not(.contact)) {
       list-style: none;
-      margin: 2pt 0 0;
+      margin: 1pt 0 0;
       padding: 0;
-      color: var(--ink);
+      color: var(--soft);
     }
 
+    /* No position: relative/absolute here: positioned boxes paint later, which scrambles the
+       PDF's text order for parsers and copy/paste. The dash is an inline hanging marker instead. */
     .resume-doc :global(ul:not(.contact) > li) {
-      position: relative;
-      margin: 4pt 0 0;
-      padding-left: 0;
+      margin: 1pt 0 0;
+      padding-left: 11pt;
       break-inside: avoid;
     }
 
     .resume-doc :global(ul:not(.contact) > li::before) {
-      content: none;
-    }
-
-    .resume-doc :global(li:has(ul)) {
-      break-inside: auto;
-    }
-
-    .resume-doc :global(ul:not(.contact) ul) {
-      margin-top: 1pt;
-      color: var(--soft);
-    }
-
-    .resume-doc :global(ul:not(.contact) ul > li) {
-      margin-top: 1pt;
-      padding-left: 11pt;
-    }
-
-    .resume-doc :global(ul:not(.contact) ul > li::before) {
-      content: "–";
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: auto;
-      height: auto;
-      border-radius: 0;
-      background: none;
+      content: "– ";
+      display: inline-block;
+      width: 11pt;
+      margin-left: -11pt;
       color: var(--dim);
     }
   }
