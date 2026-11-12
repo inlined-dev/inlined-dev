@@ -22,9 +22,10 @@ Shaping platform-wide strategy across organizations and specialties
   - Drove plan to safely migrate Firebase Functions customers to Cloud Run functions with no code changes
   - Using a production-grade, AI-first side project to surface the day-2 friction developers hit after the demo
 
-Led Function Kits as the replacement for Firebase Extensions, turning a shutdown into an upgrade
-  - Set strategy with senior leadership against external deadlines, then trained and handed off to the owning team
-  - Closed feature gaps, shipped an agent skill for migration, and merged two CLIs and a service into one CLI
+Led Function Kits: ordinary Functions replace the Extensions CLI and service, turning a shutdown into an upgrade
+  - Pitched it after earlier attempts stalled, set strategy with senior leadership against a deadline, then handed off
+  - Audited Extensions-only gaps and led the fixes, building declarative IAM role bindings and API dependencies
+  - Shipped migration tooling and an agent skill that port any extension, even abandoned ones, to Functions v2
 
 Embedded with Genkit for its 1.0 launch, now at nearly 1M monthly [npm downloads](https://api.npmjs.org/downloads/point/2026-10-12:2026-11-10/genkit)
   - Redesigned HTTP binding contract so exposing Genkit in any web framework takes one line
@@ -49,10 +50,10 @@ Co-created the [CloudEvents standard](https://cloudevents.io) with serverless.co
 
 Contributed to [Knative](https://knative.dev/) primitives and eventing, demoing Pub/Sub transport and Kubernetes event sources
 
-Improved efficiency and observability across App Engine Standard, Cloud Functions, and Cloud Run
-  - Removed main-thread scheduling, reshaping API locks and using read-only maps & atomic counters
-  - Moved tenant sidecar metrics to shared Envoy & container server, unblocking sidecar removal
-  - Built a composite event-metric engine; fixed tenant & fleet identity gaps to ship Cloud Trace
+Helped cut fleet cost of the shared container host behind App Engine, Functions v1, and Cloud Run
+  - Removed its main-thread model, reworked locks with short critical sections, immutable data, and atomics
+  - Moved sidecar metrics to shared Envoy and host, unblocking its removal; fleet-wide shadow verification
+  - Rebuilt metrics pipeline as an event-to-metric library, fixing why Cloud Trace never worked on Functions/Run
 
 Designed and shipped Google's original event subscription platform, succeeded by Eventarc
 
