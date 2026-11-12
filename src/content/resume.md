@@ -19,7 +19,7 @@ Shaping platform-wide strategy across organizations and specialties
 
 Led Function Kits: ordinary Functions replace the Extensions CLI and service, turning a shutdown into an upgrade
   - Pitched it after earlier attempts stalled, set strategy with senior leadership against a deadline
-  - Audited Extensions-only gaps and led the fixes, building declarative IAM role bindings and API dependencies
+  - Audited feature gaps and led the fixes, building declarative IAM role bindings and API dependencies
   - Shipped migration tooling and an agent skill that port any extension, even abandoned ones, to Functions v2
 
 Embedded with Genkit for its 1.0 launch, now at nearly 1M monthly [npm downloads](https://api.npmjs.org/downloads/point/2026-10-12:2026-11-10/genkit)
