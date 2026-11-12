@@ -6,5 +6,6 @@
   "percolator": "https://tikv.org/deep-dive/distributed-transaction/percolator/",
   "npm-genkit": "https://api.npmjs.org/downloads/point/2026-10-12:2026-11-10/genkit",
   "npm-functions": "https://api.npmjs.org/downloads/point/2026-10-12:2026-11-10/firebase-functions",
-  "npm-apphosting": "https://api.npmjs.org/downloads/point/2026-10-12:2026-11-10/@apphosting/adapter-nextjs"
+  "npm-apphosting": "https://api.npmjs.org/downloads/point/2026-10-12:2026-11-10/@apphosting/adapter-nextjs",
+  "next17": "https://www.youtube.com/watch?v=GNR9El3XWYo"
 }

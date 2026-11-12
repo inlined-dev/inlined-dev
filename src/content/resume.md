@@ -53,8 +53,8 @@ Rebuilt Cloud Functions and Cloud Run's monitoring pipeline and added Cloud Trac
 Designed and shipped Google's original event subscription platform, succeeded by Eventarc
 
 #### Firebase · Senior Software Engineer (L5) · 2015 - 2017
-Proposed, staffed, and led Firebase Functions
-  - Delivered every planned integration across four orgs on schedule
+Proposed and led Firebase Functions as tech lead, interviewing and recommending its hires
+  - Delivered every planned integration across four orgs on schedule, for the [Cloud Next 2017](https://www.youtube.com/watch?v=GNR9El3XWYo) launch
   - Built the Realtime Database event pipeline and evolved it into a common platform launched with four sources
 
 Improved Realtime Database reliability
