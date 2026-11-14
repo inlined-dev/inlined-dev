@@ -110,19 +110,19 @@ decade. With the power of AI, I'm able to experiment where I'm weaker, such as U
 and accelerate where I'm stronger, such as distributed systems or production
 management. A new landscape requires a new approach.
 
-Here my best results came when I inverted my previous lessions. After leaning on
-technical skills to model management, I'm modeling management to fix techncial
+Here my best results came when I inverted my previous lessons. After leaning on
+technical skills to model management, I'm modeling management to fix technical
 problems with agentic development. As a manager and legacy codebase maintainer,
 I'm used to codebases that are too big to read fully. Since
 this project has low consequences of failure, I designed an SDLC with the
 assumption that strict code review was an unnecessary bottleneck, similar to
-a platform tech lead that must review every engineer's code.
+a platform tech lead who must review every engineer's code.
 
 The first change to my process was the introduction of a project management style
 guide. Agents would organize work into epics and sprints. Each came with user
 stories, requirements, and implementation plans. Human review blocked each
 step of design but rarely implementation. On a team, a docs-heavy culture allows
-directed attention, oversight, and improves onboarding. This is more true with AI.
+directed attention and oversight, and improves onboarding. This is even more true with AI.
 Leads (humans) put most of their attention on project design, and new hires (fresh sessions or new agents) understand _why_ something exists rather than 
 just that it does. Architecture docs are in organized English not distributed 
 code which helps context management for humans and agents alike. The results were 
@@ -134,7 +134,7 @@ My initial theory is that I needed to work with other humans. Is teamwork dead?
 Of course not. But teams will likely be smaller and the model will change. We
 are all tech lead/managers now. Many times, an efficient role with your agent
 mirrors a reporting chain. Efficient roles between ICs will likely mirror those
-of cross-org collaboratoin.
+of cross-org collaboration.
 
 How strong is this new thesis? It's still evolving. I'm already taking some
 lessons back to my day job, my project is only in closed beta at the moment, and
