@@ -112,29 +112,32 @@ management. To test my lesson against the new backdrop of AI, I've not just
 built a prototype, but dramatically expanded scope and built the same production
 guardrails I would have used at Google on a million-user product.
 
-My results: through the disciplined approach of changing _my_ role from
-colleague to manager and applying the same focus on process and self-improvement
-to AI, I've been able to build something that even solo heroics could not have
-in the past. I have frequently worked on codebases too large to read and this is
-a low-stakes experiment, so I eventually gave up on manually reviewing all code.
-Rather, I did what I did as a manager: implement a software design process and
-use English documents to explain high-level knowledge to both leads (humans) and
-new hires (fresh sessions or different agents). This was my first big
-breakthrough that let me develop more quickly and saved me from the swings of a
-beautiful prototype that collapses when the next feature is added.
+Here my best results came when I inverted my previous lessions. After using technical skills to improve my soft skills, AI reached better productivity using my soft skills to shape my technical process. Treating AI as a report to manage
+maps to many technical problems with agentic development. As a manager and
+legacy engineer, I'm used to codebases that are too big to read fully. Since
+this project has low consequences of failure, I designed my SDLC with the
+assumption that strict code review was an unnecessary bottleneck.
 
-Is teamwork dead? Of course not. But the size of a team needs stronger
-justification than before, and we should consciously model our relationship with AI.
-Oftentimes it's best to consider ourselves as a group of tech leads and managers, not
-just ICs.  ICs must consider the interlocking of work between their agents to
-achieve maximum productivity, and work between ICs may now mirror collaboration
-between organizations in yesteryear. 
+Instead, I focused on defining the SDLC. I created a project management style
+guide. Agents would organize work into epics and sprints. Each came with user
+stories, requirements, and implementation plans. Human review blocked design
+but not implementation. A docs heavy culture allowed asynchronous review as an
+org, and the analogy holds here too. Leads (humans) and new hires (fresh sessions
+or new agents) benefit from documentation. Architecture docs are in organized
+English not distributed code. The results were readily apparent. I switched
+from a fragile prototype that broke each time a new feature was added to having
+faith my agent could execute several epics in parallel.
+
+My initial theory is that I needed to work with other humans. Is teamwork dead?
+Of course not. But teams will likely be smaller and the model will change. We
+are all tech lead/managers now. Many times, an efficient role with your agent
+mirrors a reporting chain. Efficient roles between ICs will likely mirror those
+of cross-org collaboratoin.
 
 How strong is this new thesis? It's still evolving. I'm already taking some
 lessons back to my day job, my project is only in closed beta at the moment, and
 the risk profile is dramatically smaller than my work at Google. But the
-introspection is producing valuable lessons that will take many more posts to
-share.
+introspection gives me a model to experiment.
 
 ## Up next
 
