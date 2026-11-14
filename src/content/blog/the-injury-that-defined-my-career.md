@@ -2,7 +2,7 @@
 title: "The injury that defined my career (so far)"
 date: 2026-11-12
 summary: "What RSI taught me about solo heroics, and whether the lesson survives AI"
-tags: ["heroics", "ai", "teamwork"]
+tags: ["heroics", "teamwork", "agentic development"]
 draft: true
 ---
 
