@@ -1,7 +1,7 @@
 ---
-title: "The injury that defined my career (so far)"
+title: "The injury that defined my career"
 date: 2026-11-12
-summary: "What RSI taught me about solo heroics, and whether the lesson survives AI"
+summary: "Losing the ability to brute-force code turned me into an engineering manager, just in time for an era when everyone has to be one."
 tags: ["heroics", "teamwork", "agentic development"]
 draft: true
 ---
