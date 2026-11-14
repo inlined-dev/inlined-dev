@@ -110,21 +110,25 @@ decade. With the power of AI, I'm able to experiment where I'm weaker, such as U
 and accelerate where I'm stronger, such as distributed systems or production
 management. A new landscape requires a new approach.
 
-Here my best results came when I inverted my previous lessions. After using technical skills to improve my soft skills, AI reached better productivity using my soft skills to shape my technical process. Treating AI as a report to manage
-maps to many technical problems with agentic development. As a manager and
-legacy engineer, I'm used to codebases that are too big to read fully. Since
-this project has low consequences of failure, I designed my SDLC with the
-assumption that strict code review was an unnecessary bottleneck.
+Here my best results came when I inverted my previous lessions. After leaning on
+technical skills to model management, I'm modeling management to fix techncial
+problems with agentic development. As a manager and legacy codebase maintainer,
+I'm used to codebases that are too big to read fully. Since
+this project has low consequences of failure, I designed an SDLC with the
+assumption that strict code review was an unnecessary bottleneck, similar to
+a platform tech lead that must review every engineer's code.
 
-Instead, I focused on defining the SDLC. I created a project management style
+The first change to my process was the introduction of a project management style
 guide. Agents would organize work into epics and sprints. Each came with user
-stories, requirements, and implementation plans. Human review blocked design
-but not implementation. A docs heavy culture allowed asynchronous review as an
-org, and the analogy holds here too. Leads (humans) and new hires (fresh sessions
-or new agents) benefit from documentation. Architecture docs are in organized
-English not distributed code. The results were readily apparent. I switched
-from a fragile prototype that broke each time a new feature was added to having
-faith my agent could execute several epics in parallel.
+stories, requirements, and implementation plans. Human review blocked each
+step of design but rarely implementation. On a team, a docs-heavy culture allows
+directed attention, oversight, and improves onboarding. This is more true with AI.
+Leads (humans) put most of their attention on project design, and new hires (fresh sessions or new agents) understand _why_ something exists rather than 
+just that it does. Architecture docs are in organized English not distributed 
+code which helps context management for humans and agents alike. The results were 
+readily apparent. I switched from a fragile prototype that broke each time a
+new feature was added to having faith my agent could execute several epics in
+parallel.
 
 My initial theory is that I needed to work with other humans. Is teamwork dead?
 Of course not. But teams will likely be smaller and the model will change. We
