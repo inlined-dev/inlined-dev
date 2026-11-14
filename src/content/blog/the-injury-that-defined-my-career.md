@@ -108,9 +108,7 @@ Firebase. But this time AI complements my skills as much as it accelerates them.
 I'm spending my free time building a game I've wanted to build for over a
 decade. With the power of AI, I'm able to experiment where I'm weaker, such as UX,
 and accelerate where I'm stronger, such as distributed systems or production
-management. To test my lesson against the new backdrop of AI, I've not just
-built a prototype, but dramatically expanded scope and built the same production
-guardrails I would have used at Google on a million-user product.
+management. A new landscape requires a new approach.
 
 Here my best results came when I inverted my previous lessions. After using technical skills to improve my soft skills, AI reached better productivity using my soft skills to shape my technical process. Treating AI as a report to manage
 maps to many technical problems with agentic development. As a manager and
