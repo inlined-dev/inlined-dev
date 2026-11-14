@@ -124,22 +124,22 @@ stories, requirements, and implementation plans. Human review blocked each
 step of design but rarely implementation. On a team, a docs-heavy culture allows
 directed attention and oversight, and improves onboarding. This is even more true with AI.
 Leads (humans) put most of their attention on project design, and new hires (fresh sessions or new agents) understand _why_ something exists rather than 
-just that it does. Architecture docs are in organized English not distributed 
-code which helps context management for humans and agents alike. The results were 
+just that it does. The architecture lives in organized English, not scattered
+across the code, which helps humans and agents alike manage context. The results were 
 readily apparent. I switched from a fragile prototype that broke each time a
 new feature was added to having faith my agent could execute several epics in
 parallel.
 
-My initial theory is that I needed to work with other humans. Is teamwork dead?
+My original theory was that I needed to work with other humans. Is teamwork dead?
 Of course not. But teams will likely be smaller and the model will change. We
-are all tech lead/managers now. Many times, an efficient role with your agent
-mirrors a reporting chain. Efficient roles between ICs will likely mirror those
-of cross-org collaboration.
+are all tech lead/managers now. Often, an efficient relationship with your agents
+mirrors a reporting chain, and collaboration between ICs will start to look like
+collaboration between orgs.
 
 How strong is this new thesis? It's still evolving. I'm already taking some
 lessons back to my day job, my project is only in closed beta at the moment, and
 the risk profile is dramatically smaller than my work at Google. But the
-introspection gives me a model to experiment.
+introspection gives me a model to experiment with.
 
 ## Up next
 
