@@ -22,8 +22,8 @@ files had a 10MB limit. As I took over that product, I learned this was because
 cellular connection uploads were flaky on iOS. Experiments showed that failure
 rates scaled exponentially with file size; I recall the rate being as high as
 50% at our 10MB limit.
-After debugging I discovered the problem lay with the call to
-[`write`](https://pubs.opengroup.org/onlinepubs/9695999899/functions/write.html).
+After debugging I discovered the problem lay with the iOS networking library's
+call to [`write`](https://pubs.opengroup.org/onlinepubs/9695999899/functions/write.html).
 The function accepts a buffer and its length and returns the length written. Handling a
 partial write seems as rare as handling `malloc` returning null; it's
 technically correct, but rarely done. But it happened here: on a cellular
@@ -84,7 +84,7 @@ worried about morale problems if some people were purely keeping the lights on
 while others pioneered new products.
 
 Borrowing from CPU affinity, I gave everyone dual assignments to keep context
-switching cheap. Everyone, veteran or new hire, me included, was assigned a
+switching cheap. Every veteran and new hire, including me, was assigned a
 brownfield product as well as a greenfield project. Even our about page had an
 emoji code next to every person's name listing their dual assignments, so other
 teams could see who to ask about what. This gave us scheduling flexibility, and
@@ -119,25 +119,33 @@ a platform tech lead who must review every engineer's code. My effort in this
 experiment instead focuses on process, higher-level interpretability, and
 quality gates.
 
-The first change to my process was a set of style guides, which deserve a post
-of their own. Testing makes a simple example. I caught agents deleting tests to
-make code green, so my style guide said that this requires human approval. Then
-I caught an agent leaving dead code around only to exercise a test, so I forbade
-that in my testing style guide too. The implementation plans the AI generated
-originally made testing a final step, which led to much longer implementation
-times and cost more tokens, so I added to my project style guide that tests must
-be part of every step. I further reduced failures and implementation time by
-mandating TDD. This also helped avoid cases where the agent hallucinates and
-"forgets" the implementation.
+My first decision was that "we" would be a very docs-centric org. Project plans
+say what to build next, architecture and API docs say how the pieces fit
+together, and design docs say why something exists rather than just the code
+proving it does. Leads (humans) and new hires (new sessions or different agents)
+rely on all three. I even wrote style guides.
 
-The results were readily apparent. I switched from a fragile prototype that
-broke each time a new feature was added to having faith my agent could execute
-several epics in parallel.
+Testing guidance was refined across several of them. I caught agents deleting
+tests to make code green, so my testing style guide said that this requires
+human approval. To avoid that interruption, one agent left dead code around only
+to exercise a test, so I forbade that there too. The implementation plans the AI
+generated initially had tests as the final sprint. This led to fragile works in
+progress and an expensive correction at the end that consumed time and tokens,
+so I updated my project management style guide to require testing in every
+sprint. I further reduced failures and implementation time by mandating TDD in
+the same guide. This also helped avoid cases where the agent "forgets" part of
+the architecture requirements, possibly due to context compaction.
 
-This side project is built to be overly realistic, to reveal patterns we may not
-see in a smaller scope. Even though it is still only in closed beta, and I'm
-free to make much riskier decisions on a side project, I still discover lessons
-I can share at my day job.
+Enforcing process like I would on a team reduced the rate of regressions and
+improved velocity, as the agent could run longer sessions without oversight. I
+switched from a fragile prototype that broke each time a new feature was added
+to having faith my agent could execute several epics in parallel.
+
+This side project is built to be overly realistic, as if it were a real business
+with maintenance and operations burdens, so it reveals lessons we may not see in
+a smaller scope. Even though it is still only in closed beta, and I'm free to
+make much riskier decisions on a side project, what I learn still carries over
+to my day job.
 
 My original theory was that I needed to work with other humans. Is teamwork dead?
 Of course not. But teams will likely be smaller and the model will change. We
