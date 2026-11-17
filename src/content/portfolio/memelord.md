@@ -11,4 +11,4 @@ draft: true
 
 **Why it matters.** [Launch status and one line on what's different about it.]
 
-**My role.** Everything: product, design, and a production-grade stack on Google Cloud, built largely with AI agents under a strict development process.
+**My role.** I do all of it, from product and design to a production-grade stack on Google Cloud, built largely with AI agents under a strict development process.
