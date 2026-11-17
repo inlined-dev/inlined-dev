@@ -49,6 +49,17 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
         </span>
       </div>
     </footer>
+    {import.meta.env.PROD && (
+      <Fragment>
+        {/* Cloudflare Web Analytics. Production builds only, so local dev is not counted. */}
+        <script
+          is:inline
+          type="module"
+          src="https://static.cloudflareinsights.com/beacon.min.js"
+          data-cf-beacon='{"token": "30f357920eee47b5b622e9f19dbc984f"}'
+        />
+      </Fragment>
+    )}
   </body>
 </html>
 
