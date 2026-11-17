@@ -68,7 +68,7 @@ throwing everyone at the initial design so that everyone could take credit. The
 intentions were good, but the results were not. Changes in early designs ripple
 throughout the entire scope, and the communication and cognitive overhead was
 unmanageable. The team ground to a halt. I decided to lean on my IC skills as
-models for new soft skills. Productivity is like concurrency programming and we
+models for new soft skills. Productivity is like concurrent programming and we
 have models for reducing contention.
 
 I started thinking of the scheduling like a worker pool. Initially we had a
@@ -109,7 +109,7 @@ I'm spending my free time building a game I've wanted to build for over a
 decade. With the power of AI, I'm able to experiment where I'm weaker and
 accelerate where I'm stronger.
 
-Here my best results came when I inverted my previous lessons. After leaning on
+In this project, my best results came when I inverted my previous lessons. After leaning on
 technical skills to model management, I'm modeling management to fix technical
 problems with agentic development. As a manager and legacy codebase maintainer,
 I'm used to codebases that are too big to read fully. Since
@@ -128,7 +128,7 @@ rely on all three. I even wrote style guides.
 Testing guidance was refined across several of them. I caught agents deleting
 tests to make code green, so my testing style guide said that this requires
 human approval. To avoid that interruption, one agent left dead code around only
-to exercise a test, so I forbade that there too. The implementation plans the AI
+to exercise a test, so I banned that too. The implementation plans the AI
 generated initially had tests as the final sprint. This led to fragile works in
 progress and an expensive correction at the end that consumed time and tokens,
 so I updated my project management style guide to require testing in every
