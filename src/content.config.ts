@@ -21,14 +21,24 @@ const blog = defineCollection({
   }),
 });
 
-/** Portfolio entries work the same way: `<slug>.md` or `<slug>/index.md`. */
+/**
+ * Portfolio entries: one `<slug>.md` per product, about 100 words each. They
+ * all render on the single /portfolio page, in `order`, each under an anchor
+ * named after its slug (/portfolio#parse). `draft: true` leaves an entry off
+ * the page entirely.
+ */
 const portfolio = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/content/portfolio" }),
   schema: z.object({
     title: z.string(),
     summary: z.string(),
     role: z.string().optional(),
-    links: z.array(z.object({ label: z.string(), url: z.string().url() })).default([]),
+    org: z.string().optional(),
+    years: z.string().optional(),
+    // Absolute URLs, or site paths such as "/resume".
+    links: z
+      .array(z.object({ label: z.string(), url: z.string().regex(/^(https?:\/\/|\/)/) }))
+      .default([]),
     order: z.number().default(0),
     draft: z.boolean().default(false),
   }),

@@ -74,7 +74,7 @@ Seventh non-founder hire, building across infrastructure, the iOS and Android SD
 Helped scale Image Search indexing by replacing fixed-shard indexing with dynamic indexing on [Percolator](https://tikv.org/deep-dive/distributed-transaction/percolator/)
 
 ### Microsoft · Software Development Engineer II · 2007–2010
-Invented a novel application virtualization and streaming architecture, earning four patents
+Invented a novel application virtualization and streaming architecture, earning three patents
 
 ## Technical Skills
 **Languages**: TypeScript, Go (Prior: Python, C++, Java, C#, Ruby, Objective-C)

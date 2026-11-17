@@ -1,25 +1,58 @@
 ---
+import { render } from "astro:content";
 import Base from "../../layouts/Base.astro";
 import { getProjects } from "../../lib/content";
 
-const projects = await getProjects();
+// One page for the whole portfolio. Each entry sits under an anchor named
+// after its slug, so /portfolio#parse links straight to it.
+const projects = await Promise.all(
+  (await getProjects()).map(async (project) => ({
+    project,
+    Content: (await render(project)).Content,
+  })),
+);
+
+const isExternal = (url: string) => /^https?:\/\//.test(url);
 ---
 
-<Base title="Portfolio" description="Things Thomas Bouldin has built or led.">
+<Base title="Portfolio" description="Products Thomas Bouldin has built or led.">
   <div class="index">
     <p class="prompt">ls -l portfolio/</p>
     <h1>Portfolio</h1>
     {projects.length > 0 ? (
-      <ul class="listing">
-        {projects.map((project) => (
-          <li>
-            <div class="entry">
-              <a href={`/portfolio/${project.id}`}>{project.data.title}</a>
-              <span class="meta">{project.data.role ? `${project.data.role} · ` : ""}{project.data.summary}</span>
-            </div>
-          </li>
-        ))}
-      </ul>
+      <>
+        <ul class="listing" aria-label="Jump to an entry">
+          {projects.map(({ project }) => (
+            <li>
+              <div class="entry">
+                <a href={`#${project.id}`}>{project.data.title}</a>
+                <span class="meta">{project.data.role ? `${project.data.role} · ` : ""}{project.data.summary}</span>
+              </div>
+            </li>
+          ))}
+        </ul>
+        {projects.map(({ project, Content }) => {
+          const { title, role, org, years, links } = project.data;
+          const byline = [role, org, years].filter(Boolean).join(" · ");
+          return (
+            <section class="project" id={project.id} aria-labelledby={`${project.id}-title`}>
+              <p class="prompt">cat portfolio/{project.id}.md</p>
+              <h2 id={`${project.id}-title`}><a href={`#${project.id}`}>{title}</a></h2>
+              {byline && <p class="meta">{byline}</p>}
+              <div class="prose">
+                <Content />
+              </div>
+              {links.length > 0 && (
+                <ul class="chips" aria-label={`${title} links`}>
+                  {links.map((link) => (
+                    <li><a href={link.url}>{link.label}{isExternal(link.url) ? " ↗" : ""}</a></li>
+                  ))}
+                </ul>
+              )}
+            </section>
+          );
+        })}
+      </>
     ) : (
       <p class="empty">portfolio/: nothing here yet</p>
     )}
@@ -36,5 +69,37 @@ const projects = await getProjects();
   h1 {
     margin: 0;
     font-size: 36px;
+  }
+
+  .project {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-top: 40px;
+    scroll-margin-top: 24px;
+  }
+
+  .project h2 {
+    margin: 0;
+    font-size: 26px;
+  }
+
+  .project h2 a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .project h2 a:hover {
+    color: var(--accent-hover);
+  }
+
+  .project > .meta {
+    margin: 0;
+    color: var(--muted);
+    font-size: 14px;
+  }
+
+  .project .prose :global(> :last-child) {
+    margin-bottom: 0;
   }
 </style>

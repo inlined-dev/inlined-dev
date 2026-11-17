@@ -1,15 +1,21 @@
 ---
 title: "Cloud Functions for Firebase"
 summary: "Serverless backend code that runs in response to Firebase and Google Cloud events."
-role: "Tech lead and manager"
-order: 1
+role: "Creator, tech lead and manager"
+org: "Google"
+years: "2015–2017, 2021–present"
+order: 5
 links:
-  - label: "Product page"
-    url: "https://firebase.google.com/products/functions"
-  - label: "firebase-functions on GitHub"
-    url: "https://github.com/firebase/firebase-functions"
+  - label: "Docs"
+    url: "https://firebase.google.com/docs/functions"
+  - label: "Cloud Next 2017 talk"
+    url: "https://www.youtube.com/watch?v=GNR9El3XWYo"
+  - label: "Résumé"
+    url: "/resume"
 ---
 
-Cloud Functions for Firebase lets developers run backend code in response to events from Firebase features and HTTPS requests, without managing servers.
+Serverless backend code for Firebase apps. Functions run in response to Firebase and Google Cloud events, HTTPS requests or schedules, and deploy from one codebase with one command.
 
-[Write about what you built here: the problem, your role, the decisions you made, and what happened. A few paragraphs is plenty. Images go in `public/` and can be embedded with standard Markdown.]
+**Why it matters.** It was [the most requested feature since Firebase launched](https://firebase.blog/posts/2017/03/introducing-cloud-functions-for-firebase) when it entered beta at Cloud Next 2017, and its event model became the basis for Google's first event platform.
+
+**My role.** Proposed it and led it through launch, designing the shared event model that every Firebase product's triggers use. Later led the second generation, built on Cloud Run, and rebuilt its deploy platform around a container contract that decouples the CLI from the SDK. That opened Functions to new languages: Python first, then Dart.

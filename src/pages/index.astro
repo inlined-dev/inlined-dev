@@ -64,7 +64,7 @@ const links = [
           <ul class="entry-list">
             {projects.map((project) => (
               <li>
-                <a href={`/portfolio/${project.id}`}>{project.data.title}</a>
+                <a href={`/portfolio#${project.id}`}>{project.data.title}</a>
                 <span class="meta">
                   {project.data.role && <>{project.data.role} · </>}{project.data.summary}
                 </span>
