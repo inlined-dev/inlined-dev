@@ -1,9 +1,9 @@
 ---
 title: "The injury that defined my career"
-date: 2026-11-12
+date: 2026-11-16
 summary: "Losing the ability to brute-force code turned me into an engineering manager, just in time for an era when everyone has to be one."
 tags: ["heroics", "teamwork", "agentic development"]
-draft: true
+draft: false
 ---
 
 ## Take my hand
