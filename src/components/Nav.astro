@@ -38,7 +38,7 @@ const chevron = `<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="tr
           <summary>portfolio<Fragment set:html={chevron} /></summary>
           <div class="dropdown" role="list">
             {projects.map((project) => (
-              <a role="listitem" href={`/portfolio/${project.id}`}>{project.data.title}</a>
+              <a role="listitem" href={`/portfolio#${project.id}`}>{project.data.title}</a>
             ))}
             {projects.length === 0 && <span class="hint pad">nothing published yet</span>}
             <a role="listitem" class="all" href="/portfolio"><span class="cmd">ls</span> portfolio/ <span class="hint">· everything</span></a>
